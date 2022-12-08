@@ -11,11 +11,11 @@ const Home = () => {
   return (
     <>
       {isModalOpen ? (
-        <Modal title="Sign In">
+        <Modal closeModal={() => setIsModalOpen(false)} title="Sign In">
           <LoginForm />
         </Modal>
       ) : null}
-      <NavBar />
+      <NavBar openLoginModal={() => setIsModalOpen(true)} />
       <Welcome />
     </>
   );
