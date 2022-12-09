@@ -1,5 +1,6 @@
 import { Formik, Field, Form, getIn } from "formik";
 import { LoginSchema } from "../schemas/LoginSchema";
+import { RegisterSchema } from "../schemas/RegisterSchema";
 
 const getStyles = (errors: any, fieldName: any) => {
   return getIn(errors, fieldName)
@@ -7,18 +8,47 @@ const getStyles = (errors: any, fieldName: any) => {
     : "bg-gray-100 p-2 rounded border border-gray-200";
 };
 
-export const LoginForm = () => {
+interface ILoginFormProps {
+  type: "register" | "login";
+  switchModal: () => void;
+}
+
+export const LoginForm: React.FC<ILoginFormProps> = (props) => {
+  const { type, switchModal } = props;
+  const isRegisterForm = type === "register" ? true : false;
+
   return (
     <>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={LoginSchema}
+        initialValues={
+          isRegisterForm
+            ? { name: "", email: "", password: "" }
+            : { email: "", password: "" }
+        }
+        validationSchema={isRegisterForm ? RegisterSchema : LoginSchema}
         onSubmit={(values) => {
           console.log(values);
         }}
       >
         {({ errors, touched }) => (
           <Form className="flex flex-col justify-center">
+            {isRegisterForm ? (
+              <>
+                <label htmlFor="name" className="p-1 font-semibold">
+                  Name
+                </label>
+                <Field
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  className={getStyles(errors, "name")}
+                />
+                {errors.name && touched.name ? (
+                  <div className="text-red-500 px-1 text-xs">{errors.name}</div>
+                ) : null}
+              </>
+            ) : null}
             <label htmlFor="email" className="p-1 font-semibold">
               E-mail
             </label>
@@ -55,12 +85,12 @@ export const LoginForm = () => {
         )}
       </Formik>
       <p className="text-center">
-        Not have an account?
+        {isRegisterForm ? "Already have an account?" : "Not have an account?"}
         <a
-          href="/test"
-          className=" mx-2 text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out"
+          onClick={switchModal}
+          className="cursor-pointer mx-2 text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out hover:underline"
         >
-          Sign up here!
+          {isRegisterForm ? "Sign in here" : "Sign up here?"}
         </a>
       </p>
     </>

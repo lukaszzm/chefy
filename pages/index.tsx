@@ -6,17 +6,31 @@ import { Welcome } from "../components/Welcome";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const [modalType, setModalType] = useState<"login" | "register">("login");
 
-  console.log(isModalOpen);
+  const openLoginModalHandler = () => {
+    setIsModalOpen(true);
+    setModalType("login");
+  };
+
+  const openRegisterModalHandler = () => {
+    setIsModalOpen(true);
+    setModalType("register");
+  };
+
+  const switchModalHandler = () => {
+    modalType === "login" ? setModalType("register") : setModalType("login");
+  };
+
   return (
     <>
       {isModalOpen ? (
-        <Modal closeModal={() => setIsModalOpen(false)} title="Sign In">
-          <LoginForm />
+        <Modal closeModal={() => setIsModalOpen(false)} title={modalType}>
+          <LoginForm type={modalType} switchModal={switchModalHandler} />
         </Modal>
       ) : null}
-      <NavBar openLoginModal={() => setIsModalOpen(true)} />
-      <Welcome />
+      <NavBar openLoginModal={openLoginModalHandler} />
+      <Welcome openModal={openRegisterModalHandler} />
     </>
   );
 };
