@@ -2,8 +2,8 @@ import { Formik, Field, Form, getIn } from "formik";
 import { LoginSchema } from "../schemas/LoginSchema";
 import { RegisterSchema } from "../schemas/RegisterSchema";
 
-const getStyles = (errors: any, fieldName: any) => {
-  return getIn(errors, fieldName)
+const getStyles = (errors: any, touched: any, fieldName: any) => {
+  return getIn(errors && touched, fieldName)
     ? "bg-gray-100 p-2 rounded border border-red-500"
     : "bg-gray-100 p-2 rounded border border-gray-200";
 };
@@ -42,7 +42,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
                   name="name"
                   type="text"
                   placeholder="Your name"
-                  className={getStyles(errors, "name")}
+                  className={getStyles(errors, touched, "name")}
                 />
                 {errors.name && touched.name ? (
                   <div className="text-red-500 px-1 text-xs">{errors.name}</div>
@@ -57,7 +57,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
               name="email"
               type="email"
               placeholder="e.g example@domain.com"
-              className={getStyles(errors, "email")}
+              className={getStyles(errors, touched, "email")}
             />
             {errors.email && touched.email ? (
               <div className="text-red-500 px-1 text-xs">{errors.email}</div>
@@ -70,7 +70,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
               name="password"
               type="password"
               placeholder="Password must have at least 8 characters"
-              className={getStyles(errors, "password")}
+              className={getStyles(errors, touched, "password")}
             />
             {errors.password && touched.password ? (
               <div className="text-red-500 px-1 text-xs">{errors.password}</div>

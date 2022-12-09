@@ -3,34 +3,27 @@ import { LoginForm } from "../components/LoginForm";
 import { Modal } from "../components/Modal";
 import { NavBar } from "../components/Navbar";
 import { Welcome } from "../components/Welcome";
+import { useLoginModal } from "../hooks/useLoginModal";
 
 const Home = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
-  const [modalType, setModalType] = useState<"login" | "register">("login");
-
-  const openLoginModalHandler = () => {
-    setIsModalOpen(true);
-    setModalType("login");
-  };
-
-  const openRegisterModalHandler = () => {
-    setIsModalOpen(true);
-    setModalType("register");
-  };
-
-  const switchModalHandler = () => {
-    modalType === "login" ? setModalType("register") : setModalType("login");
-  };
+  const {
+    isModalOpen,
+    modalType,
+    switchModal,
+    openLoginModal,
+    openRegisterModal,
+    closeModal,
+  } = useLoginModal();
 
   return (
     <>
       {isModalOpen ? (
-        <Modal closeModal={() => setIsModalOpen(false)} title={modalType}>
-          <LoginForm type={modalType} switchModal={switchModalHandler} />
+        <Modal closeModal={closeModal} title={modalType}>
+          <LoginForm type={modalType} switchModal={switchModal} />
         </Modal>
       ) : null}
-      <NavBar openLoginModal={openLoginModalHandler} />
-      <Welcome openModal={openRegisterModalHandler} />
+      <NavBar openLoginModal={openLoginModal} />
+      <Welcome openModal={openRegisterModal} />
     </>
   );
 };
