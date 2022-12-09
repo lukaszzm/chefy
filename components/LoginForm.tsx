@@ -3,7 +3,7 @@ import { LoginSchema } from "../schemas/LoginSchema";
 import { RegisterSchema } from "../schemas/RegisterSchema";
 
 const getStyles = (errors: any, touched: any, fieldName: any) => {
-  return getIn(errors && touched, fieldName)
+  return getIn(errors, fieldName) && getIn(touched, fieldName)
     ? "bg-gray-100 p-2 rounded border border-red-500"
     : "bg-gray-100 p-2 rounded border border-gray-200";
 };
