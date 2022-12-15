@@ -15,13 +15,11 @@ export const authOptions: NextAuthOptions = {
           password: string;
         };
         if (email !== "test@test.com" && password !== "testtest")
-          throw new Error("invalid credentials.");
+          throw new Error("Invalid credentials. Try again.");
         return { id: "1" };
       },
     }),
   ],
-  // TODO: real secret from .env
-  secret: process.env.SECRET,
 };
 
 export default NextAuth(authOptions);

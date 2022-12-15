@@ -3,11 +3,13 @@ import { LoginSchema } from "../schemas/LoginSchema";
 import { RegisterSchema } from "../schemas/RegisterSchema";
 import { signIn } from "next-auth/react";
 import Router from "next/router";
+import { useState } from "react";
+import { Alert } from "./Alert";
 
 const getStyles = (errors: any, touched: any, fieldName: any) => {
   return getIn(errors, fieldName) && getIn(touched, fieldName)
-    ? "bg-gray-100 p-2 rounded border border-red-500"
-    : "bg-gray-100 p-2 rounded border border-gray-200";
+    ? "bg-gray-100 p-2 rounded border border-red-500 focus:outline-none"
+    : "bg-gray-100 p-2 mb-2 rounded border border-gray-200 focus:outline-none";
 };
 
 interface ILoginFormProps {
@@ -17,6 +19,7 @@ interface ILoginFormProps {
 
 export const LoginForm: React.FC<ILoginFormProps> = (props) => {
   const { type, switchModal } = props;
+  const [apiError, setApiError] = useState<string | null>(null);
   const isRegisterForm = type === "register" ? true : false;
 
   return (
@@ -29,16 +32,17 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
         }
         validationSchema={isRegisterForm ? RegisterSchema : LoginSchema}
         onSubmit={async (values) => {
+          setApiError(null);
           const res = await signIn("credentials", {
             email: values.email,
             password: values.password,
             redirect: false,
           });
-          if (res?.error) return console.log(res);
+          if (res?.error) return setApiError(res?.error);
           Router.push("/dashboard");
         }}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, isValid, isSubmitting }) => (
           <Form className="flex flex-col justify-center">
             {isRegisterForm ? (
               <>
@@ -81,24 +85,28 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
               className={getStyles(errors, touched, "password")}
             />
             {errors.password && touched.password ? (
-              <div className="text-red-500 px-1 text-xs">{errors.password}</div>
+              <div className="text-red-500 px-1 text-xs mb-2">
+                {errors.password}
+              </div>
             ) : null}
+            {apiError ? <Alert>{apiError}</Alert> : null}
             <button
               type="submit"
-              className="w-full py-3.5 bg-blue-600 text-white font-medium text-l my-4 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+              disabled={!isValid || isSubmitting}
+              className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-indigo-600 w-full py-3.5 border-indigo-600 bg-indigo-600 text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out"
             >
               Submit
             </button>
           </Form>
         )}
       </Formik>
-      <p className="text-center">
+      <p className="text-center my-2">
         {isRegisterForm ? "Already have an account?" : "Not have an account?"}
         <a
           onClick={switchModal}
-          className="cursor-pointer mx-2 text-blue-500 hover:text-blue-700 transition duration-150 ease-in-out hover:underline"
+          className="cursor-pointer font-semibold mx-2 text-indigo-600 hover:text-indigo-700 transition duration-150 ease-in-out hover:underline"
         >
-          {isRegisterForm ? "Sign in here" : "Sign up here?"}
+          {isRegisterForm ? "Sign in here!" : "Sign up here!"}
         </a>
       </p>
     </>
