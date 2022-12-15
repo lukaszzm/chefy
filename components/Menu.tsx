@@ -1,5 +1,6 @@
 import { BiHeart, BiGlobe, BiLogOut, BiSlider } from "react-icons/bi";
 import { MenuItem } from "./Menu/MenuItem";
+import { signOut } from "next-auth/react";
 
 export const Menu = () => {
   // TODO: dodać isActive zmieniajace
@@ -17,7 +18,7 @@ export const Menu = () => {
       <div className="w-56 flex flex-col pt-10">
         <MenuItem
           type="button"
-          onClick={() => console.log("LOG OUT!")}
+          onClick={() => signOut()}
           text="log out"
           icon={<BiLogOut />}
         />
