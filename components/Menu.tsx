@@ -1,8 +1,9 @@
-import Link from "next/link";
 import { BiHeart, BiGlobe, BiLogOut, BiSlider } from "react-icons/bi";
 import { MenuItem } from "./Menu/MenuItem";
 
 export const Menu = () => {
+  // TODO: dodać isActive zmieniajace
+  // TODO: linki nie działaja poprawnie, tj. /dashboard/dashboard
   return (
     <div className="h-screen max-w-xs bg-gray-100 flex flex-col justify-start items-center shadow-xl">
       <div className="w-full p-5 font-bold border-">
