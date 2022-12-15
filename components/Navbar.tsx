@@ -16,7 +16,7 @@ export const NavBar: React.FC<INavBarProps> = (props) => {
         </Link>
         <button
           onClick={openLoginModal}
-          className="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-m leading-tight rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-300 active:shadow-lg transition duration-150 ease-in-out"
+          className="inline-block px-6 py-2.5 bg-primary text-white font-medium text-m leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-hover active:shadow-lg transition duration-150 ease-in-out"
         >
           Login
         </button>

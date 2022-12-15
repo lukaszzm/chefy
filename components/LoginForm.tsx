@@ -93,7 +93,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
             <button
               type="submit"
               disabled={!isValid || isSubmitting}
-              className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-indigo-600 w-full py-3.5 border-indigo-600 bg-indigo-600 text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out"
+              className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-primary w-full py-3.5 border-primary bg-primary text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-hover active:shadow-lg transition duration-150 ease-in-out"
             >
               Submit
             </button>
@@ -104,7 +104,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
         {isRegisterForm ? "Already have an account?" : "Not have an account?"}
         <a
           onClick={switchModal}
-          className="cursor-pointer font-semibold mx-2 text-indigo-600 hover:text-indigo-700 transition duration-150 ease-in-out hover:underline"
+          className="cursor-pointer font-semibold mx-2 text-primary hover:text-primary-hover transition duration-150 ease-in-out hover:underline"
         >
           {isRegisterForm ? "Sign in here!" : "Sign up here!"}
         </a>
