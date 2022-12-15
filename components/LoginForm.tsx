@@ -1,6 +1,8 @@
 import { Formik, Field, Form, getIn } from "formik";
 import { LoginSchema } from "../schemas/LoginSchema";
 import { RegisterSchema } from "../schemas/RegisterSchema";
+import { signIn } from "next-auth/react";
+import Router from "next/router";
 
 const getStyles = (errors: any, touched: any, fieldName: any) => {
   return getIn(errors, fieldName) && getIn(touched, fieldName)
@@ -26,8 +28,14 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
             : { email: "", password: "" }
         }
         validationSchema={isRegisterForm ? RegisterSchema : LoginSchema}
-        onSubmit={(values) => {
-          console.log(values);
+        onSubmit={async (values) => {
+          const res = await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: false,
+          });
+          if (res?.error) return console.log(res);
+          Router.push("/dashboard");
         }}
       >
         {({ errors, touched }) => (
