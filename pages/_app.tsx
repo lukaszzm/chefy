@@ -2,20 +2,22 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
-import { DashboardLayout } from "../layout/DashboardLayout";
+import { Layout } from "../layout/Layout";
+
+const protectedRoutes = ["/explore", "/likes", "/settings"];
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  if (router.pathname.startsWith("/dashboard/")) {
+  if (protectedRoutes.includes(router.pathname)) {
     return (
       <SessionProvider session={pageProps.session}>
-        <DashboardLayout>
+        <Layout>
           <Head>
             <title>Chefy</title>
             <meta name="description" content="Chefy - We love cooking" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Component {...pageProps} />;
-        </DashboardLayout>
+        </Layout>
       </SessionProvider>
     );
   }

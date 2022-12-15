@@ -18,13 +18,13 @@ const Home = () => {
   } = useLoginModal();
   const { status } = useSession();
   const router = useRouter();
-  console.log(status);
+
   if (status === "loading") {
     return <LoadingScreen />;
   }
 
   if (status === "authenticated") {
-    router.replace("/dashboard");
+    router.replace("/explore");
   }
 
   if (status === "unauthenticated")
