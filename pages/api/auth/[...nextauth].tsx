@@ -5,6 +5,8 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  // TODO: add better secret via .env
+  secret: "kfdngmkfdnbkdfnb",
   providers: [
     CredentialsProvider({
       type: "credentials",

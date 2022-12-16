@@ -39,7 +39,6 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
             redirect: false,
           });
           if (res?.error) return setApiError(res?.error);
-          Router.push("/dashboard");
         }}
       >
         {({ errors, touched, isValid, isSubmitting }) => (

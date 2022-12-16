@@ -6,6 +6,8 @@ import { Modal } from "../components/Modal";
 import { NavBar } from "../components/Navbar";
 import { Welcome } from "../components/Welcome";
 import { useLoginModal } from "../hooks/useLoginModal";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 const Home = () => {
   const {
@@ -40,5 +42,25 @@ const Home = () => {
       </>
     );
 };
+
+export async function getServerSideProps(context: any) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/explore",
+        permament: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}
 
 export default Home;
