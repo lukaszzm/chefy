@@ -1,7 +1,5 @@
-import { useSession } from "next-auth/react";
 import { Menu } from "../components/Menu";
-import { useRouter } from "next/router";
-import { LoadingScreen } from "../components/LoadingScreen";
+import { Container } from "../components/Container";
 import { NextPage } from "next";
 
 interface IDashboardLayoutProps {
@@ -12,9 +10,9 @@ export const Layout: NextPage<IDashboardLayoutProps> = (props) => {
   const { children } = props;
 
   return (
-    <>
+    <div className="w-full h-full flex">
       <Menu />
-      {children}
-    </>
+      <Container>{children}</Container>
+    </div>
   );
 };
