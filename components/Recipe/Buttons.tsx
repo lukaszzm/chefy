@@ -12,13 +12,13 @@ export const Buttons: React.FC<IButtonsProps> = (props) => {
         onClick={onCancelClick}
         className="p-2 flex justify-center items-center w-20 h-20 font-semibold text-lg text-white bg-red-400 rounded-full shadow-sm hover:bg-red-500 transition duration-150  ease-in-out"
       >
-        <BiX />
+        <BiX size="42px" height="1x" />
       </button>
       <button
         onClick={onLikeClick}
         className="p-2 flex justify-center items-center w-20 h-20 font-semibold text-lg  text-white bg-green-400 rounded-full shadow-sm hover:bg-green-500 transition duration-150  ease-in-out"
       >
-        <BiHeart />
+        <BiHeart size="32px" height="1x" />
       </button>
     </div>
   );

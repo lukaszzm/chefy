@@ -13,6 +13,10 @@ export const ImageContainer: React.FC<IImageContainerProps> = (props) => {
       <Image
         src={src}
         fill
+        priority
+        sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
         alt={alt}
         className="rounded-md shadow-sm border border-gray-200 self-center"
       />
