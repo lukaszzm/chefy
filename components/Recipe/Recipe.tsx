@@ -55,7 +55,7 @@ export const Recipe = () => {
     <div className="flex flex-col max-w-sm overflow-hidden">
       <ImageContainer src={recipe.strMealThumb} alt={recipe.strMeal} />
       <h2 className="font-semibold text-2xl m-2">{recipe.strMeal}</h2>
-      <div className="overflow-auto max-h-96">
+      <div className="overflow-auto max-h-96 mb-2">
         <Category category={recipe.strCategory} area={recipe.strArea} />
         {recipe.ingredientsList && (
           <Ingredients
