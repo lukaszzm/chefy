@@ -69,7 +69,7 @@ export const Recipe = () => {
         />
         <button
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="p-2 font-semibold text-md text-gray-700 bg-gray-100 my-3 mx-6 px-10 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm transition duration-150  ease-in-out"
+          className="p-2 font-semibold text-sm text-gray-700 bg-gray-100 px-10 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm transition duration-150  ease-in-out"
         >
           {isShortVersion ? "Read More" : "Read less"}
         </button>
