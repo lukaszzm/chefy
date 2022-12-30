@@ -17,6 +17,7 @@ export const Recipe = () => {
 
   const getRecipe = async () => {
     setIsLoading(true);
+    setIsShortVersion(true);
     try {
       const response = await axios.get(
         "https://www.themealdb.com/api/json/v1/1/random.php"
@@ -52,7 +53,7 @@ export const Recipe = () => {
   if (!recipe) return <p>{error}</p>;
 
   return (
-    <div className="flex flex-col max-w-sm overflow-hidden">
+    <>
       <ImageContainer src={recipe.strMealThumb} alt={recipe.strMeal} />
       <h2 className="font-semibold text-2xl m-2">{recipe.strMeal}</h2>
       <div className="overflow-auto max-h-96 mb-2">
@@ -75,6 +76,6 @@ export const Recipe = () => {
         </button>
       </div>
       <Buttons onLikeClick={likeHandler} onCancelClick={cancelHandler} />
-    </div>
+    </>
   );
 };

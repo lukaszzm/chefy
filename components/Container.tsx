@@ -6,8 +6,8 @@ export const Container: React.FC<IContainerProps> = (props) => {
   const { children } = props;
 
   return (
-    <div className="w-full overflow-auto bg-blue flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg text-center m-6">
+    <div className="w-full h-full flex justify-center items-center overflow-auto">
+      <div className="bg-white p-2 rounded-lg shadow-lg text-center m-6 flex flex-col max-w-md">
         {children}
       </div>
     </div>
