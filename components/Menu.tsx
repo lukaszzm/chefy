@@ -3,8 +3,6 @@ import { MenuItem } from "./Menu/MenuItem";
 import { signOut } from "next-auth/react";
 
 export const Menu = () => {
-  // TODO: dodać isActive zmieniajace
-  // TODO: linki nie działaja poprawnie, tj. /dashboard/dashboard
   return (
     <div className="h-screen max-w-xs bg-gray-100 flex flex-col justify-start items-center shadow-xl">
       <div className="w-full p-5 font-bold border-">

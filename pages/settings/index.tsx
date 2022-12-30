@@ -3,7 +3,7 @@ import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 const Settings: NextPage = () => {
-  return <h1>SETTINGS</h1>;
+  return <h1>Settings</h1>;
 };
 
 export async function getServerSideProps(context: any) {

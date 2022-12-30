@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { RecipePreview } from "../../components/RecipePreview";
+import { Recipe } from "../../components/Recipe/Recipe";
 
 const Explore: NextPage = () => {
   return (
@@ -9,7 +9,7 @@ const Explore: NextPage = () => {
       <h1 className="text-primary font-bold text-xl capitalize mb-5">
         explore
       </h1>
-      <RecipePreview />
+      <Recipe />
     </>
   );
 };

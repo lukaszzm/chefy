@@ -16,7 +16,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
             <meta name="description" content="Chefy - We love cooking" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Component {...pageProps} />;
+          <Component {...pageProps} />
         </Layout>
       </SessionProvider>
     );
