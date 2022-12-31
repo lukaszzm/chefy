@@ -13,19 +13,14 @@ const Explore: NextPage<IExploreProps> = (props) => {
   const { recipe } = props;
 
   return (
-    <>
-      <h1 className="text-primary font-bold text-xl capitalize mb-5">
-        explore
-      </h1>
-      <Recipe
-        title={recipe.strMeal}
-        img={recipe.strMealThumb}
-        category={recipe.strCategory}
-        area={recipe.strArea}
-        ingredientsList={recipe.ingredientsList}
-        instructions={recipe.strInstructions}
-      />
-    </>
+    <Recipe
+      title={recipe.strMeal}
+      img={recipe.strMealThumb}
+      category={recipe.strCategory}
+      area={recipe.strArea}
+      ingredientsList={recipe.ingredientsList}
+      instructions={recipe.strInstructions}
+    />
   );
 };
 

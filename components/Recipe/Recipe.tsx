@@ -4,6 +4,7 @@ import { Instruction } from "./Instruction";
 import { Buttons } from "./Buttons";
 import { Category } from "./Category";
 import { ImageContainer } from "./ImageContainer";
+import { ModuleDetectionKind } from "typescript";
 
 interface IRecipeProps {
   title: string;
