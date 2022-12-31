@@ -10,7 +10,6 @@ interface IModalProps {
 export const Modal: React.FC<IModalProps> = (props) => {
   const { children, title, closeModal, isModalOpen } = props;
 
-  console.log(isModalOpen);
   return (
     <AnimatePresence>
       {isModalOpen && (
