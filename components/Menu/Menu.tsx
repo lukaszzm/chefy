@@ -1,8 +1,9 @@
 import { BiHeart, BiGlobe, BiLogOut, BiSlider } from "react-icons/bi";
-import { MenuItem } from "./Menu/MenuItem";
+import { MenuItem } from "./MenuItem";
 import { signOut } from "next-auth/react";
-import { useModal } from "../hooks/useModal";
-import { Modal } from "./Modal";
+import { useModal } from "../../hooks/useModal";
+import { Modal } from "../Modal";
+import { LogoutModal } from "./LogoutModal";
 
 export const Menu = () => {
   const { isModalOpen, openModal, closeModal } = useModal();
@@ -27,23 +28,7 @@ export const Menu = () => {
           />
         </div>
       </div>
-      <Modal isModalOpen={isModalOpen} closeModal={closeModal} title="Log out">
-        <p className="text-center">Are you sure you want to log out?</p>
-        <div className="flex justify-around mt-2">
-          <button
-            onClick={() => closeModal()}
-            className="p-2 font-semibold text-md my-3 mx-6 px-10 rounded-xl border border-primary hover:bg-gray-100 hover:shadow-sm transition duration-150  ease-in-out flex justify-between items-center"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={() => signOut()}
-            className="p-1 font-semibold text-md my-3 mx-6 px-10 rounded-xl border text-white border-red-400 bg-red-400 hover:bg-red-500 hover:shadow-sm transition duration-150  ease-in-out flex justify-between items-center"
-          >
-            Logout
-          </button>
-        </div>
-      </Modal>
+      <LogoutModal isModalOpen={isModalOpen} closeModal={closeModal} />
     </>
   );
 };

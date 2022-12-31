@@ -1,4 +1,4 @@
-import { Menu } from "../components/Menu";
+import { Menu } from "../components/Menu/Menu";
 import { Container } from "../components/Container";
 import { NextPage } from "next";
 
