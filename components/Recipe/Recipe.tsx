@@ -1,10 +1,6 @@
-import axios from "axios";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Ingredients } from "./Ingredients";
-import { getIngredientsList } from "../../utils/getIngredientsList";
 import { Instruction } from "./Instruction";
-import { Recipe as IRecipe } from "../../interfaces/Recipe.interface";
 import { Buttons } from "./Buttons";
 import { Category } from "./Category";
 import { ImageContainer } from "./ImageContainer";

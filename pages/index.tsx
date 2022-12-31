@@ -32,11 +32,13 @@ const Home = () => {
   if (status === "unauthenticated")
     return (
       <>
-        {isModalOpen ? (
-          <Modal closeModal={closeModal} title={modalType}>
-            <LoginForm type={modalType} switchModal={switchModal} />
-          </Modal>
-        ) : null}
+        <Modal
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          title={modalType}
+        >
+          <LoginForm type={modalType} switchModal={switchModal} />
+        </Modal>
         <NavBar openLoginModal={openLoginModal} />
         <Welcome openModal={openRegisterModal} />
       </>
