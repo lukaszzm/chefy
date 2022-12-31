@@ -45,5 +45,5 @@ export interface Recipe {
   strMeasure18: string;
   strMeasure19: string;
   strMeasure20: string;
-  ingredientsList?: string[];
+  ingredientsList: string[];
 }
