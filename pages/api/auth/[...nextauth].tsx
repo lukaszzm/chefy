@@ -1,24 +1,35 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "../../../lib/prisma";
 
 export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
   },
-  // TODO: add better secret via .env
-  secret: "kfdngmkfdnbkdfnb",
+  secret: process.env.SECRET_KEY,
   providers: [
     CredentialsProvider({
       type: "credentials",
       credentials: {},
-      authorize(credentials, req) {
+      async authorize(credentials, req) {
         const { email, password } = credentials as {
           email: string;
           password: string;
         };
-        if (email !== "test@test.com" && password !== "testtest")
-          throw new Error("Invalid credentials. Try again.");
-        return { id: "1" };
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: email,
+          },
+        });
+
+        if (!user) throw new Error("Invalid email.");
+
+        if (user.password !== password) throw new Error("Invalid password.");
+
+        return user;
       },
     }),
   ],
