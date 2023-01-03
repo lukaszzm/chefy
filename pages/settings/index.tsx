@@ -2,8 +2,21 @@ import { NextPage } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 
-const Settings: NextPage = () => {
-  return <h1>Settings</h1>;
+interface ISettingsProps {
+  mail: string;
+}
+
+const Settings: NextPage<ISettingsProps> = (props) => {
+  const { mail } = props;
+
+  return (
+    <>
+      <h1>Settings</h1>
+      <p>
+        Logged as <span className="text-red-600 font-bold">{mail}</span>
+      </p>
+    </>
+  );
 };
 
 export async function getServerSideProps(context: any) {
@@ -22,7 +35,7 @@ export async function getServerSideProps(context: any) {
     };
   }
   return {
-    props: {},
+    props: { mail: session.user?.email },
   };
 }
 
