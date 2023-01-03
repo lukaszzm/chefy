@@ -1,8 +1,6 @@
 import { BiHeart, BiGlobe, BiLogOut, BiSlider } from "react-icons/bi";
 import { MenuItem } from "./MenuItem";
-import { signOut } from "next-auth/react";
 import { useModal } from "../../hooks/useModal";
-import { Modal } from "../Modal";
 import { LogoutModal } from "./LogoutModal";
 
 export const Menu = () => {

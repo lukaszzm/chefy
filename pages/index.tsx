@@ -1,13 +1,14 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { LoadingScreen } from "../components/LoadingScreen";
-import { LoginForm } from "../components/LoginForm";
-import { Modal } from "../components/Modal";
-import { NavBar } from "../components/Navbar";
-import { Welcome } from "../components/Welcome";
+import { LoadingScreen } from "../components/UI/LoadingScreen";
+import { LoginForm } from "../components/Forms/LoginForm";
+import { Modal } from "../components/UI/Modal";
+import { NavBar } from "../components/Home/Navbar";
+import { Welcome } from "../components/Home/Welcome";
 import { useLoginModal } from "../hooks/useLoginModal";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
+import { RegisterForm } from "../components/Forms/RegisterForm";
 
 const Home = () => {
   const {
@@ -37,7 +38,11 @@ const Home = () => {
           closeModal={closeModal}
           title={modalType}
         >
-          <LoginForm type={modalType} switchModal={switchModal} />
+          {modalType === "login" ? (
+            <LoginForm switchModal={switchModal} />
+          ) : (
+            <RegisterForm switchModal={switchModal} />
+          )}
         </Modal>
         <NavBar openLoginModal={openLoginModal} />
         <Welcome openModal={openRegisterModal} />

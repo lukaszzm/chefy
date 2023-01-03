@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { Recipe } from "../../components/Recipe/Recipe";
-import axios from "axios";
 import { getIngredientsList } from "../../utils/getIngredientsList";
 import { Recipe as IRecipe } from "../../interfaces/Recipe.interface";
 import { unstable_getServerSession } from "next-auth";
