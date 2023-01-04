@@ -2,6 +2,8 @@ import { LoginSchema } from "../../schemas/LoginSchema";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@corex/hook-form-yup-resolver";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { Alert } from "../UI/Alert";
 
 interface ILoginFormProps {
   switchModal: () => void;
@@ -9,7 +11,7 @@ interface ILoginFormProps {
 
 interface IFormInputs {
   email: string;
-  password: number;
+  password: string;
 }
 
 export const LoginForm: React.FC<ILoginFormProps> = (props) => {
@@ -17,14 +19,23 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<IFormInputs>({
     resolver: yupResolver(LoginSchema),
     mode: "onChange",
   });
   const [apiError, setApiError] = useState<string | null>(null);
 
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = async (values: IFormInputs) => {
+    const { email, password } = values;
+    const response = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false,
+    });
+
+    if (!response?.ok) setApiError(response?.error || "Something went wrong.");
+  };
 
   return (
     <>
@@ -53,9 +64,14 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
           }`}
         />
         <p className="text-red-500 px-1 text-xs">{errors.password?.message}</p>
+        {apiError && (
+          <Alert className="mt-2" isError>
+            {apiError}
+          </Alert>
+        )}
         <button
           type="submit"
-          disabled={!isValid || !isDirty}
+          disabled={!isValid || !isDirty || isSubmitting}
           className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-primary w-full py-3.5 border-primary bg-primary text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-hover active:shadow-lg transition duration-150 ease-in-out"
         >
           Submit

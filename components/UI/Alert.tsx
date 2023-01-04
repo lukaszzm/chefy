@@ -1,15 +1,22 @@
+import { motion } from "framer-motion";
+
 interface IAlertProps {
   children: React.ReactNode;
   className?: string;
+  isError?: boolean;
 }
 
 export const Alert: React.FC<IAlertProps> = (props) => {
-  const { className, children } = props;
+  const { className, children, isError } = props;
   return (
-    <div
-      className={`w-11/12 m-auto bg-red-400 text-white p-3 rounded text-sm ${className}`}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={`w-11/12 m-auto text-white p-3 rounded text-sm ${className} ${
+        isError ? "bg-red-400" : "bg-green-400"
+      }`}
     >
       <p>{children}</p>
-    </div>
+    </motion.div>
   );
 };

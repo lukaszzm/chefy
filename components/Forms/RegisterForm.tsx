@@ -11,7 +11,12 @@ interface IRegisterFormProps {
 interface IFormInputs {
   email: string;
   name: string;
-  password: number;
+  password: string;
+}
+
+interface IApiResponse {
+  error: boolean;
+  text: string;
 }
 
 export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
@@ -19,14 +24,32 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
+    formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<IFormInputs>({
     resolver: yupResolver(RegisterSchema),
     mode: "onChange",
   });
-  const [apiError, setApiError] = useState<string | null>(null);
+  const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
 
-  const onSubmit = (data: IFormInputs) => console.log(data);
+  const onSubmit = async (values: IFormInputs) => {
+    setApiResponse(null);
+    const response = await fetch("/api/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    const data = await response.json();
+
+    if (!response.ok)
+      return setApiResponse({ error: true, text: data.message });
+
+    setApiResponse({
+      error: false,
+      text: data.message,
+    });
+  };
 
   return (
     <>
@@ -68,11 +91,15 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
           }`}
         />
         <p className="text-red-500 px-1 text-xs">{errors.password?.message}</p>
-        {apiError && <Alert className="mt-2">{apiError}</Alert>}
+        {apiResponse && (
+          <Alert isError={apiResponse.error} className="mt-2">
+            {apiResponse.text}
+          </Alert>
+        )}
         <button
           type="submit"
-          disabled={!isDirty || !isValid}
-          className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-primary w-full py-3.5 border-primary bg-primary text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-hover active:shadow-lg transition duration-150 ease-in-out"
+          disabled={!isDirty || !isValid || isSubmitting}
+          className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-primary w-full py-3.5 border-primary bg-primary text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out"
         >
           Submit
         </button>
