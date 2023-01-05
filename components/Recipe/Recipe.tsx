@@ -12,18 +12,41 @@ interface IRecipeProps {
   area: string;
   ingredientsList: string[];
   instructions: string;
+  reFetchRecipe: () => void;
 }
 
 export const Recipe: React.FC<IRecipeProps> = (props) => {
-  const { title, img, category, area, ingredientsList, instructions } = props;
+  const {
+    title,
+    img,
+    category,
+    area,
+    ingredientsList,
+    instructions,
+    reFetchRecipe,
+  } = props;
   const [isShortVersion, setIsShortVersion] = useState(true);
 
-  const likeHandler = () => {
-    console.log("LIKE");
+  const likeHandler = async () => {
+    const response = await fetch("/api/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        img: img,
+        category: category,
+        area: area,
+        ingredients: ingredientsList,
+        instructions: instructions,
+      }),
+    });
+    reFetchRecipe();
   };
 
   const cancelHandler = () => {
-    console.log("DONT LIKE");
+    reFetchRecipe();
   };
 
   return (

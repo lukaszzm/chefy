@@ -3,7 +3,9 @@ import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 const Likes: NextPage = () => {
-  return <h1>LIKES</h1>;
+  return (
+    <h1 className="font-bold text-primary text-lg capitalize">your recipes</h1>
+  );
 };
 
 export async function getServerSideProps(context: any) {
@@ -21,6 +23,7 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
+
   return {
     props: {},
   };

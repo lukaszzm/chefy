@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,27 +8,55 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String   @unique
-  name          String
-  password      String   
-  accounts      Account[]
-  sessions      Session[]
+  id              String    @id @default(cuid())
+  email           String    @unique
+  name            String
+  password        String
+  accounts        Account[]
+  sessions        Session[]
+  likedRecipes    Recipe[]  @relation("UserLikedRecipes")
+  dislikedRecipes Recipe[]  @relation("UserDislikedRecipes")
+}
+
+model Recipe {
+  id           String   @id @default(cuid())
+  imageSrc     String?
+  title        String   @unique
+  category     Category @relation(fields: [categoryId], references: [id])
+  categoryId   String
+  area         Area     @relation(fields: [areaId], references: [id])
+  areaId       String
+  ingredients  String[]
+  instructions String
+  likers       User[]   @relation(name: "UserLikedRecipes")
+  dislikers    User[]   @relation(name: "UserDislikedRecipes")
+}
+
+model Category {
+  id     String   @id @default(cuid())
+  name   String   @unique
+  Recipe Recipe[]
+}
+
+model Area {
+  id     String   @id @default(cuid())
+  name   String   @unique
+  Recipe Recipe[]
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

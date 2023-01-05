@@ -4,13 +4,18 @@ import { Recipe } from "../../components/Recipe/Recipe";
 import { getIngredientsList } from "../../utils/getIngredientsList";
 import { Recipe as IRecipe } from "../../interfaces/Recipe.interface";
 import { unstable_getServerSession } from "next-auth";
+import { useRouter } from "next/router";
 
 interface IExploreProps {
   recipe: IRecipe;
 }
 const Explore: NextPage<IExploreProps> = (props) => {
   const { recipe } = props;
+  const router = useRouter();
 
+  const reFetchRecipe = () => {
+    router.replace(router.asPath);
+  };
   return (
     <Recipe
       title={recipe.strMeal}
@@ -19,6 +24,7 @@ const Explore: NextPage<IExploreProps> = (props) => {
       area={recipe.strArea}
       ingredientsList={recipe.ingredientsList}
       instructions={recipe.strInstructions}
+      reFetchRecipe={reFetchRecipe}
     />
   );
 };
