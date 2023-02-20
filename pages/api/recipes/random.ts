@@ -61,16 +61,8 @@ export default async function handler(
       ],
     },
     include: {
-      category: {
-        select: {
-          name: true,
-        },
-      },
-      area: {
-        select: {
-          name: true,
-        },
-      },
+      category: true,
+      area: true,
     },
   });
 

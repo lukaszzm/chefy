@@ -1,28 +1,31 @@
 import { NextPage } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { Recipe } from "../../components/Recipe/Recipe";
-import { getIngredientsList } from "../../utils/getIngredientsList";
-import { Recipe as IRecipe } from "../../interfaces/Recipe.interface";
 import { unstable_getServerSession } from "next-auth";
-import { useRouter } from "next/router";
+import { useRandomRecipe } from "../../hooks/useRandomRecipe";
 
-interface IExploreProps {
-  recipe: IRecipe;
-}
-const Explore: NextPage<IExploreProps> = (props) => {
-  const router = useRouter();
+const Explore: NextPage = () => {
+  const { data, error, isLoading, refetchData } = useRandomRecipe();
 
-  return <div>TEST</div>;
-  //   <Recipe
-  //     title={recipe.strMeal}
-  //     img={recipe.strMealThumb}
-  //     category={recipe.strCategory}
-  //     area={recipe.strArea}
-  //     ingredientsList={recipe.ingredientsList}
-  //     instructions={recipe.strInstructions}
-  //     reFetchRecipe={reFetchRecipe}
-  //   />
-  // );
+  if (isLoading) return <p>Loading...</p>;
+
+  if (error) return <p>Error</p>;
+
+  if (data)
+    return (
+      <Recipe
+        id={data.id}
+        title={data.title}
+        imageSrc={data.imageSrc}
+        category={data.category}
+        area={data.area}
+        ingredients={data.ingredients}
+        instructions={data.instructions}
+        refetchRecipe={() => refetchData()}
+      />
+    );
+
+  return <div>Nothing to see.</div>;
 };
 
 export async function getServerSideProps(context: any) {
@@ -40,11 +43,6 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
-  const response = await fetch("http://localhost:3000/api/recipes/random", {
-    headers: {
-      cookie: context.req.headers.cookie || "",
-    },
-  });
 
   return {
     props: {},

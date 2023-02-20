@@ -4,60 +4,63 @@ import { Instruction } from "./Instruction";
 import { Buttons } from "./Buttons";
 import { Category } from "./Category";
 import { ImageContainer } from "./ImageContainer";
+import { IRecipe } from "../../interfaces/Recipe.interface";
 
-interface IRecipeProps {
-  title: string;
-  img: string;
-  category: string;
-  area: string;
-  ingredientsList: string[];
-  instructions: string;
-  reFetchRecipe: () => void;
+interface IRecipeProps extends IRecipe {
+  refetchRecipe: () => void;
 }
 
 export const Recipe: React.FC<IRecipeProps> = (props) => {
   const {
+    id,
     title,
-    img,
+    imageSrc,
     category,
     area,
-    ingredientsList,
+    ingredients,
     instructions,
-    reFetchRecipe,
+    refetchRecipe,
   } = props;
   const [isShortVersion, setIsShortVersion] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const likeHandler = async () => {
-    const response = await fetch("/api/recipes", {
+    setIsSubmitting(true);
+    const response = await fetch("/api/recipes/likes", {
       method: "POST",
+      body: JSON.stringify({ id }),
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        title: title,
-        img: img,
-        category: category,
-        area: area,
-        ingredients: ingredientsList,
-        instructions: instructions,
-      }),
     });
-    reFetchRecipe();
+
+    setIsSubmitting(false);
+    if (response.ok) refetchRecipe();
   };
 
-  const cancelHandler = () => {
-    reFetchRecipe();
+  const cancelHandler = async () => {
+    setIsSubmitting(true);
+    const response = await fetch("/api/recipes/dislikes", {
+      method: "POST",
+      body: JSON.stringify({ id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    setIsSubmitting(false);
+    if (response.ok) refetchRecipe();
   };
 
   return (
     <>
-      <ImageContainer src={img} alt={title} />
+      <ImageContainer src={imageSrc} alt={title} />
       <h2 className="font-semibold text-2xl m-2">{title}</h2>
       <div className="overflow-auto max-h-96 mb-2">
-        <Category category={category} area={area} />
+        <Category category={category.name} area={area.name} />
         <Ingredients
           shortVersion={isShortVersion}
-          ingredientsList={ingredientsList}
+          ingredientsList={ingredients}
         />
         <Instruction shortVersion={isShortVersion} instruction={instructions} />
         <button
@@ -67,7 +70,11 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
           {isShortVersion ? "Read More" : "Read less"}
         </button>
       </div>
-      <Buttons onLikeClick={likeHandler} onCancelClick={cancelHandler} />
+      <Buttons
+        isSubmitting={isSubmitting}
+        onLikeClick={likeHandler}
+        onCancelClick={cancelHandler}
+      />
     </>
   );
 };
