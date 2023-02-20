@@ -10,23 +10,19 @@ interface IExploreProps {
   recipe: IRecipe;
 }
 const Explore: NextPage<IExploreProps> = (props) => {
-  const { recipe } = props;
   const router = useRouter();
 
-  const reFetchRecipe = () => {
-    router.replace(router.asPath);
-  };
-  return (
-    <Recipe
-      title={recipe.strMeal}
-      img={recipe.strMealThumb}
-      category={recipe.strCategory}
-      area={recipe.strArea}
-      ingredientsList={recipe.ingredientsList}
-      instructions={recipe.strInstructions}
-      reFetchRecipe={reFetchRecipe}
-    />
-  );
+  return <div>TEST</div>;
+  //   <Recipe
+  //     title={recipe.strMeal}
+  //     img={recipe.strMealThumb}
+  //     category={recipe.strCategory}
+  //     area={recipe.strArea}
+  //     ingredientsList={recipe.ingredientsList}
+  //     instructions={recipe.strInstructions}
+  //     reFetchRecipe={reFetchRecipe}
+  //   />
+  // );
 };
 
 export async function getServerSideProps(context: any) {
@@ -44,15 +40,14 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
-  const response = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/random.php"
-  );
-  const data = await response.json();
-  const ingredientsList = getIngredientsList(data.meals[0]);
-  const recipe = { ...data.meals[0], ingredientsList };
+  const response = await fetch("http://localhost:3000/api/recipes/random", {
+    headers: {
+      cookie: context.req.headers.cookie || "",
+    },
+  });
 
   return {
-    props: { recipe },
+    props: {},
   };
 }
 

@@ -26,11 +26,25 @@ export default async function handler(
   if (user)
     return res.status(409).json({ message: "This email is already used." });
 
+  const defaultCategoriesIds = await prisma.category.findMany({
+    select: { id: true },
+  });
+
+  const defaultAreasIds = await prisma.area.findMany({
+    select: { id: true },
+  });
+
   await prisma.user.create({
     data: {
       email: email,
       name: name,
       password: bcrypt.hashSync(password, 10),
+      prefferedCategories: {
+        connect: defaultCategoriesIds,
+      },
+      prefferedAreas: {
+        connect: defaultAreasIds,
+      },
     },
   });
 

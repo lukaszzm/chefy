@@ -8,14 +8,16 @@ datasource db {
 }
 
 model User {
-  id              String    @id @default(cuid())
-  email           String    @unique
-  name            String
-  password        String
-  accounts        Account[]
-  sessions        Session[]
-  likedRecipes    Recipe[]  @relation("UserLikedRecipes")
-  dislikedRecipes Recipe[]  @relation("UserDislikedRecipes")
+  id                  String     @id @default(cuid())
+  email               String     @unique
+  name                String
+  password            String
+  accounts            Account[]
+  sessions            Session[]
+  likedRecipes        Recipe[]   @relation("UserLikedRecipes")
+  dislikedRecipes     Recipe[]   @relation("UserDislikedRecipes")
+  prefferedCategories Category[]
+  prefferedAreas      Area[]
 }
 
 model Recipe {
@@ -36,12 +38,14 @@ model Category {
   id     String   @id @default(cuid())
   name   String   @unique
   Recipe Recipe[]
+  User   User[]
 }
 
 model Area {
   id     String   @id @default(cuid())
   name   String   @unique
   Recipe Recipe[]
+  User   User[]
 }
 
 model Account {
