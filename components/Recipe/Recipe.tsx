@@ -55,7 +55,9 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   return (
     <>
       <ImageContainer src={imageSrc} alt={title} />
-      <h2 className="font-semibold text-2xl m-2">{title}</h2>
+      <h2 className="font-semibold text-2xl m-2 whitespace-nowrap overflow-hidden text-ellipsis">
+        {title}
+      </h2>
       <div className="overflow-auto max-h-96 mb-2">
         <Category category={category.name} area={area.name} />
         <Ingredients

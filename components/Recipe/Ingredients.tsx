@@ -10,7 +10,7 @@ export const Ingredients: React.FC<IIngredientsProps> = (props) => {
     ? ingredientsList.slice(0, 3)
     : ingredientsList;
 
-  if (shortVersion) fixedIngredientsList.push("...");
+  if (shortVersion) fixedIngredientsList.push("And more");
 
   return (
     <>
