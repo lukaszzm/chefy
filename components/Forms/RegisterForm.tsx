@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { RegisterSchema } from "../../schemas/RegisterSchema";
 import { useState } from "react";
 import { Alert } from "../UI/Alert";
+import { IApiResponse } from "../../interfaces/ApiResponse";
 
 interface IRegisterFormProps {
   switchModal: () => void;
@@ -12,11 +13,6 @@ interface IFormInputs {
   email: string;
   name: string;
   password: string;
-}
-
-interface IApiResponse {
-  error: boolean;
-  text: string;
 }
 
 export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
@@ -43,10 +39,10 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
     const data = await response.json();
 
     if (!response.ok)
-      return setApiResponse({ error: true, text: data.message });
+      return setApiResponse({ isError: true, text: data.message });
 
     setApiResponse({
-      error: false,
+      isError: false,
       text: data.message,
     });
   };
@@ -92,7 +88,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
         />
         <p className="text-red-500 px-1 text-xs">{errors.password?.message}</p>
         {apiResponse && (
-          <Alert isError={apiResponse.error} className="mt-2">
+          <Alert isError={apiResponse.isError} className="mt-2">
             {apiResponse.text}
           </Alert>
         )}

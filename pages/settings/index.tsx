@@ -1,20 +1,30 @@
 import { NextPage } from "next";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { Account } from "../../components/Settings/Account";
+import { Preferences } from "../../components/Settings/Preferences";
 
 interface ISettingsProps {
-  mail: string;
+  email: string;
+  name: string;
 }
 
 const Settings: NextPage<ISettingsProps> = (props) => {
-  const { mail } = props;
+  const { email, name } = props;
 
   return (
     <>
-      <h1>Settings</h1>
-      <p>
-        Logged as <span className="text-red-600 font-bold">{mail}</span>
-      </p>
+      <h1 className="font-semibold text-gray-800 text-2xl capitalize mb-5">
+        Settings
+      </h1>
+      <h2 className="text-left font-semibold w-full pb-1 border-b border-b-gray-400  text-lg">
+        General Info
+      </h2>
+      <Account email={email} name={name} />
+      <h2 className="text-left font-semibold w-full pb-1 border-b border-b-gray-400  text-lg">
+        Preferences
+      </h2>
+      <Preferences />
     </>
   );
 };
@@ -34,8 +44,10 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
+  console.log(session.user?.name);
+
   return {
-    props: { mail: session.user?.email },
+    props: { email: session.user?.email, name: session.user?.name },
   };
 }
 

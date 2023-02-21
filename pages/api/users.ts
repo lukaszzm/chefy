@@ -12,41 +12,61 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== "POST")
+  if (req.method !== "POST" && req.method !== "PATCH")
     return res.status(405).json({ message: "Method not allowed." });
 
-  const { email, name, password }: ICredentials = req.body;
+  if (req.method === "POST") {
+    const { email, name, password }: ICredentials = req.body;
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
-
-  if (user)
-    return res.status(409).json({ message: "This email is already used." });
-
-  const defaultCategoriesIds = await prisma.category.findMany({
-    select: { id: true },
-  });
-
-  const defaultAreasIds = await prisma.area.findMany({
-    select: { id: true },
-  });
-
-  await prisma.user.create({
-    data: {
-      email: email,
-      name: name,
-      password: bcrypt.hashSync(password, 10),
-      prefferedCategories: {
-        connect: defaultCategoriesIds,
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
       },
-      prefferedAreas: {
-        connect: defaultAreasIds,
-      },
-    },
-  });
+    });
 
-  return res.status(201).json({ message: "Success! Successfully registered." });
+    if (user)
+      return res.status(409).json({ message: "This email is already used." });
+
+    const defaultCategoriesIds = await prisma.category.findMany({
+      select: { id: true },
+    });
+
+    const defaultAreasIds = await prisma.area.findMany({
+      select: { id: true },
+    });
+
+    await prisma.user.create({
+      data: {
+        email: email,
+        name: name,
+        password: bcrypt.hashSync(password, 10),
+        prefferedCategories: {
+          connect: defaultCategoriesIds,
+        },
+        prefferedAreas: {
+          connect: defaultAreasIds,
+        },
+      },
+    });
+
+    return res
+      .status(201)
+      .json({ message: "Success! Successfully registered." });
+  }
+
+  if (req.method === "PATCH") {
+    const { email, name }: { email: string; name: string } = req.body;
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        email,
+      },
+      data: {
+        email,
+        name,
+      },
+    });
+
+    return res.status(204).end();
+  }
 }
