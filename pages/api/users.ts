@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
 import bcrypt from "bcrypt";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "./auth/[...nextauth]";
 
 interface ICredentials {
   email: string;
@@ -55,14 +57,20 @@ export default async function handler(
   }
 
   if (req.method === "PATCH") {
-    const { email, name }: { email: string; name: string } = req.body;
+    const session = await unstable_getServerSession(req, res, authOptions);
+    const userEmail = session?.user?.email;
+
+    if (!userEmail) {
+      return res.status(401).end();
+    }
+
+    const { name }: { name: string } = req.body;
 
     const updatedUser = await prisma.user.update({
       where: {
-        email,
+        email: userEmail,
       },
       data: {
-        email,
         name,
       },
     });

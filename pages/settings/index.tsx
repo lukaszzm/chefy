@@ -5,12 +5,11 @@ import { Account } from "../../components/Settings/Account";
 import { Preferences } from "../../components/Settings/Preferences";
 
 interface ISettingsProps {
-  email: string;
   name: string;
 }
 
 const Settings: NextPage<ISettingsProps> = (props) => {
-  const { email, name } = props;
+  const { name } = props;
 
   return (
     <>
@@ -20,7 +19,7 @@ const Settings: NextPage<ISettingsProps> = (props) => {
       <h2 className="text-left font-semibold w-full pb-1 border-b border-b-gray-400  text-lg">
         General Info
       </h2>
-      <Account email={email} name={name} />
+      <Account name={name} />
       <h2 className="text-left font-semibold w-full pb-1 border-b border-b-gray-400  text-lg">
         Preferences
       </h2>
@@ -44,10 +43,9 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
-  console.log(session.user?.name);
 
   return {
-    props: { email: session.user?.email, name: session.user?.name },
+    props: { name: session.user?.name },
   };
 }
 

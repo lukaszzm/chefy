@@ -7,37 +7,25 @@ import { Alert } from "../UI/Alert";
 
 interface IAccountProps {
   name: string;
-  email: string;
 }
-
-interface IFormInputs {
-  name: string;
-  email: string;
-}
-
-const reloadSession = () => {
-  const event = new Event("visibilitychange");
-  document.dispatchEvent(event);
-};
 
 export const Account: React.FC<IAccountProps> = (props) => {
-  const { email, name } = props;
+  const { name } = props;
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
-  } = useForm<IFormInputs>({
+  } = useForm<IAccountProps>({
     resolver: yupResolver(UserSettingsSchema),
     mode: "onChange",
     defaultValues: {
       name: name,
-      email: email,
     },
   });
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
 
-  const onSubmit = async (values: IFormInputs) => {
+  const onSubmit = async (values: IAccountProps) => {
     setApiResponse(null);
     const response = await fetch("/api/users", {
       method: "PATCH",
@@ -54,7 +42,6 @@ export const Account: React.FC<IAccountProps> = (props) => {
       isError: false,
       text: "Success! Your data has been changed. Log in again to see the changes. ",
     });
-    reloadSession();
   };
 
   return (
@@ -74,18 +61,6 @@ export const Account: React.FC<IAccountProps> = (props) => {
         }`}
       />
       <p className="text-red-500 px-1 text-xs mb-2">{errors.name?.message}</p>
-      <label htmlFor="password" className="p-2 font-semibold text-gray-700">
-        Email
-      </label>
-      <input
-        {...register("email")}
-        type="email"
-        placeholder="example@gmail.com"
-        className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
-          errors.email ? "border-red-500" : "border-gray-200"
-        }`}
-      />
-      <p className="text-red-500 px-1 text-xs mb-2">{errors.email?.message}</p>
       {apiResponse && (
         <Alert isError={apiResponse.isError} className="mt-2">
           {apiResponse.text}
