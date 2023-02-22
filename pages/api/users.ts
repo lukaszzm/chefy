@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../lib/prisma";
 import bcrypt from "bcrypt";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession, unstable_getServerSession } from "next-auth";
 import { authOptions } from "./auth/[...nextauth]";
 
 interface ICredentials {
@@ -19,10 +19,11 @@ export default async function handler(
 
   if (req.method === "POST") {
     const { email, name, password }: ICredentials = req.body;
+    const fixedEmail = email.toLowerCase();
 
     const user = await prisma.user.findUnique({
       where: {
-        email,
+        email: fixedEmail,
       },
     });
 
@@ -39,7 +40,7 @@ export default async function handler(
 
     await prisma.user.create({
       data: {
-        email: email,
+        email: fixedEmail,
         name: name,
         password: bcrypt.hashSync(password, 10),
         prefferedCategories: {
@@ -57,7 +58,7 @@ export default async function handler(
   }
 
   if (req.method === "PATCH") {
-    const session = await unstable_getServerSession(req, res, authOptions);
+    const session = await getServerSession(req, res, authOptions);
     const userEmail = session?.user?.email;
 
     if (!userEmail) {
@@ -66,7 +67,7 @@ export default async function handler(
 
     const { name }: { name: string } = req.body;
 
-    const updatedUser = await prisma.user.update({
+    await prisma.user.update({
       where: {
         email: userEmail,
       },

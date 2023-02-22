@@ -19,10 +19,11 @@ export const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
+        const fixedEmail = email.toLowerCase();
 
         const user = await prisma.user.findUnique({
           where: {
-            email,
+            email: fixedEmail,
           },
         });
 
