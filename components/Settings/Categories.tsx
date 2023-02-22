@@ -35,7 +35,7 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
             key={el.id}
             id={el.id}
             text={el.name}
-            isDefaultChecked={isItemChosen(el, checkedByDefaultCategories)}
+            isCheckedByDefault={isItemChosen(el, checkedByDefaultCategories)}
           />
         ))}
       </ul>
