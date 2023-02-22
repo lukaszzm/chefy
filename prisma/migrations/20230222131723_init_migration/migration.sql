@@ -1,29 +1,25 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
 
-  - You are about to drop the column `area` on the `Recipe` table. All the data in the column will be lost.
-  - You are about to drop the column `category` on the `Recipe` table. All the data in the column will be lost.
-  - You are about to drop the `_RecipeToUser` table. If the table is not empty, all the data it contains will be lost.
-  - A unique constraint covering the columns `[title]` on the table `Recipe` will be added. If there are existing duplicate values, this will fail.
-  - Added the required column `areaId` to the `Recipe` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `categoryId` to the `Recipe` table without a default value. This is not possible if the table is not empty.
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
 
-*/
--- DropForeignKey
-ALTER TABLE "_RecipeToUser" DROP CONSTRAINT "_RecipeToUser_A_fkey";
+-- CreateTable
+CREATE TABLE "Recipe" (
+    "id" TEXT NOT NULL,
+    "imageSrc" TEXT,
+    "title" TEXT NOT NULL,
+    "categoryId" TEXT NOT NULL,
+    "areaId" TEXT NOT NULL,
+    "ingredients" TEXT[],
+    "instructions" TEXT NOT NULL,
 
--- DropForeignKey
-ALTER TABLE "_RecipeToUser" DROP CONSTRAINT "_RecipeToUser_B_fkey";
-
--- AlterTable
-ALTER TABLE "Recipe" DROP COLUMN "area",
-DROP COLUMN "category",
-ADD COLUMN     "areaId" TEXT NOT NULL,
-ADD COLUMN     "categoryId" TEXT NOT NULL,
-ALTER COLUMN "imageSrc" DROP NOT NULL;
-
--- DropTable
-DROP TABLE "_RecipeToUser";
+    CONSTRAINT "Recipe_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Category" (
@@ -53,6 +49,24 @@ CREATE TABLE "_UserDislikedRecipes" (
     "B" TEXT NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "_CategoryToUser" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_AreaToUser" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Recipe_title_key" ON "Recipe"("title");
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
 
@@ -72,7 +86,16 @@ CREATE UNIQUE INDEX "_UserDislikedRecipes_AB_unique" ON "_UserDislikedRecipes"("
 CREATE INDEX "_UserDislikedRecipes_B_index" ON "_UserDislikedRecipes"("B");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Recipe_title_key" ON "Recipe"("title");
+CREATE UNIQUE INDEX "_CategoryToUser_AB_unique" ON "_CategoryToUser"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_CategoryToUser_B_index" ON "_CategoryToUser"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_AreaToUser_AB_unique" ON "_AreaToUser"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_AreaToUser_B_index" ON "_AreaToUser"("B");
 
 -- AddForeignKey
 ALTER TABLE "Recipe" ADD CONSTRAINT "Recipe_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -91,3 +114,15 @@ ALTER TABLE "_UserDislikedRecipes" ADD CONSTRAINT "_UserDislikedRecipes_A_fkey" 
 
 -- AddForeignKey
 ALTER TABLE "_UserDislikedRecipes" ADD CONSTRAINT "_UserDislikedRecipes_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_CategoryToUser" ADD CONSTRAINT "_CategoryToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Category"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_CategoryToUser" ADD CONSTRAINT "_CategoryToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_AreaToUser" ADD CONSTRAINT "_AreaToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Area"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_AreaToUser" ADD CONSTRAINT "_AreaToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
