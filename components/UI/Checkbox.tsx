@@ -19,7 +19,6 @@ export const Checkbox = React.forwardRef<HTMLInputElement, ICheckBox>(
           value={id}
           type="checkbox"
           defaultChecked={isCheckedByDefault}
-          onClick={() => console.log(id)}
           className={`hidden peer`}
           {...rest}
         />

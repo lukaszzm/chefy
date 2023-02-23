@@ -1,18 +1,18 @@
-import { useForm } from "react-hook-form";
-import { ICategory } from "../../interfaces/Category.interface";
 import { useState } from "react";
-import { isItemChosen } from "../../utils/isItemChosen";
-import { Checkbox } from "../UI/Checkbox";
+import { IArea } from "../../interfaces/Area.interface";
 import { IApiResponse } from "../../interfaces/ApiResponse";
+import { useForm } from "react-hook-form";
+import { Checkbox } from "../UI/Checkbox";
+import { isItemChosen } from "../../utils/isItemChosen";
 import { Alert } from "../UI/Alert";
 
-interface ICategoriesProps {
-  allCategories: ICategory[];
-  checkedByDefaultCategories: ICategory[];
+interface IAreasProps {
+  allAreas: IArea[];
+  checkedByDefaultAreas: IArea[];
 }
 
-export const Categories: React.FC<ICategoriesProps> = (props) => {
-  const { allCategories, checkedByDefaultCategories } = props;
+export const Areas: React.FC<IAreasProps> = (props) => {
+  const { allAreas, checkedByDefaultAreas } = props;
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
   const {
     register,
@@ -27,7 +27,7 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prefferedCategories: values.items }),
+      body: JSON.stringify({ prefferedAreas: values.items }),
     });
 
     if (!response.ok)
@@ -45,16 +45,16 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
       className="text-left m-2 pb-2 border-b border-b-gray-200"
     >
       <label htmlFor="Category" className="p-2 font-semibold text-gray-700 ">
-        Categories
+        Areas
       </label>
       <ul className="flex flex-wrap">
-        {allCategories.map((el) => (
+        {allAreas.map((el) => (
           <Checkbox
             {...register("items")}
             key={el.id}
             id={el.id}
             text={el.name}
-            isCheckedByDefault={isItemChosen(el, checkedByDefaultCategories)}
+            isCheckedByDefault={isItemChosen(el, checkedByDefaultAreas)}
           />
         ))}
       </ul>
