@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { Checkbox } from "../UI/Checkbox";
 import { isItemChosen } from "../../utils/isItemChosen";
 import { Alert } from "../UI/Alert";
+import { Button } from "../UI/Button";
+import { Label } from "../UI/Label";
 
 interface IAreasProps {
   allAreas: IArea[];
@@ -44,9 +46,7 @@ export const Areas: React.FC<IAreasProps> = (props) => {
       onSubmit={handleSubmit(onSubmit)}
       className="text-left m-2 pb-2 border-b border-b-gray-200"
     >
-      <label htmlFor="Category" className="p-2 font-semibold text-gray-700 ">
-        Areas
-      </label>
+      <Label htmlFor="Category">Areas</Label>
       <ul className="flex flex-wrap">
         {allAreas.map((el) => (
           <Checkbox
@@ -63,13 +63,13 @@ export const Areas: React.FC<IAreasProps> = (props) => {
           {apiResponse.text}
         </Alert>
       )}
-      <button
-        type="submit"
+      <Button
+        type="primary"
         className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-primary w-full py-2.5 border-primary bg-primary text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-hover active:shadow-lg transition duration-150 ease-in-out"
         disabled={!isDirty || isSubmitting}
       >
         Save changes
-      </button>
+      </Button>
     </form>
   );
 };

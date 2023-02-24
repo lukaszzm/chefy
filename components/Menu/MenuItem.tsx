@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Button } from "../UI/Button";
 
 interface IMenuItemProps {
   icon: JSX.Element;
@@ -20,10 +21,10 @@ export const MenuItem: React.FC<IMenuItemProps> = (props) => {
 
   if (type === "button")
     return (
-      <button className={style} onClick={onClick}>
+      <Button type="none" className={style} onClick={onClick}>
         {icon}
         <p className="capitalize">{text}</p>
-      </button>
+      </Button>
     );
 
   return (

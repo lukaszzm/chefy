@@ -5,6 +5,8 @@ import { Buttons } from "./Buttons";
 import { Category } from "./Category";
 import { ImageContainer } from "./ImageContainer";
 import { IRecipe } from "../../interfaces/Recipe.interface";
+import { Title } from "../UI/Title";
+import { Button } from "../UI/Button";
 
 interface IRecipeProps extends IRecipe {
   refetchRecipe: () => void;
@@ -55,9 +57,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   return (
     <>
       <ImageContainer src={imageSrc} alt={title} />
-      <h2 className="font-semibold text-2xl m-2 whitespace-nowrap overflow-hidden text-ellipsis">
-        {title}
-      </h2>
+      <Title className="m-2">{title}</Title>
       <div className="overflow-auto max-h-96 mb-2">
         <Category category={category.name} area={area.name} />
         <Ingredients
@@ -65,12 +65,13 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
           ingredientsList={ingredients}
         />
         <Instruction shortVersion={isShortVersion} instruction={instructions} />
-        <button
+        <Button
+          type="none"
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="p-2 font-semibold text-sm text-gray-700 bg-gray-100 px-10 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm transition duration-150  ease-in-out"
+          className="font-semibold text-sm text-gray-700 bg-gray-100 px-4 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
         >
           {isShortVersion ? "Read More" : "Read less"}
-        </button>
+        </Button>
       </div>
       <Buttons
         isSubmitting={isSubmitting}

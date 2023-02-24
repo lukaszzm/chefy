@@ -2,6 +2,8 @@ import { useState } from "react";
 import { IApiResponse } from "../../interfaces/ApiResponse";
 import { Alert } from "../UI/Alert";
 import { useRouter } from "next/router";
+import { Subtitle } from "../UI/Subtitle";
+import { Button } from "../UI/Button";
 
 interface IRecipeDetailsProps {
   id: string;
@@ -36,8 +38,8 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
   return (
     <>
       <div className="overflow-auto h-96">
-        <div className="text-left py-2 border-b-2 border-t-2">
-          <h2 className="font-semibold text-lg mb-1">Ingredients</h2>
+        <div className="py-2 border-b-2 border-t-2">
+          <Subtitle className="mb-1">Ingredients</Subtitle>
           <div className="flex flex-row flex-wrap max-w-full">
             {ingredients.map((el, index) => (
               <div
@@ -50,25 +52,25 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
           </div>
         </div>
         <div className="text-left py-2 border-b-2">
-          <h2 className="font-semibold text-lg mb-1">Instructions</h2>
+          <Subtitle className="mb-1">Instructions</Subtitle>
           <div className="flex flex-row flex-wrap max-w-full">
             <p className="text-sm">{instructions}</p>
           </div>
         </div>
       </div>
-      <button className="w-full p-2 mt-4 mb-2 rounded-md shadow-md bg-primary text-white font-semibold hover:bg-primary-hover transition duration-150  ease-in-out">
+      <Button type="primary" className="mt-3">
         Generate PDF
-      </button>
+      </Button>
       {apiResponse && (
         <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
-      <button
+      <Button
         disabled={isSubmitting}
         onClick={deleteHandler}
-        className="w-full p-2 my-2 rounded-md shadow-md border border-red-400 text-red-400 font-semibold hover:bg-red-400 hover:text-white transition duration-150  ease-in-out"
+        type="outline-danger"
       >
         Delete from likes
-      </button>
+      </Button>
     </>
   );
 };

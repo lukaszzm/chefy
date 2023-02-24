@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { Title } from "./Title";
 
 interface IModalProps {
   title: string;
@@ -29,9 +30,7 @@ export const Modal: React.FC<IModalProps> = (props) => {
             transition={{ duration: 0.2 }}
             className="fixed z-50 top-1/2 left-1/2 py-8 px-10 border w-2/3 max-w-md shadow-lg rounded-md bg-white"
           >
-            <h2 className="text-center text-3xl font-semibold mb-5 capitalize">
-              {title}
-            </h2>
+            <Title className="text-center text-3xl">{title}</Title>
             {children}
           </motion.div>
         </>

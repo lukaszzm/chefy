@@ -4,6 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import prisma from "../../lib/prisma";
 import { IRecipe } from "../../interfaces/Recipe.interface";
 import { LikedRecipe } from "../../components/Likes/LikedRecipe";
+import { Title } from "../../components/UI/Title";
 
 interface ILikesProps {
   recipes: IRecipe[];
@@ -14,9 +15,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
 
   return (
     <>
-      <h1 className="font-semibold text-gray-800 text-2xl capitalize mb-5">
-        your liked recipes
-      </h1>
+      <Title>Your liked recipes</Title>
       {recipes.length > 0 ? (
         recipes.map((el) => (
           <LikedRecipe

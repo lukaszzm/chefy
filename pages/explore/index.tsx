@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { Recipe } from "../../components/Recipe/Recipe";
 import { RecipeLoading } from "../../components/Recipe/RecipeLoading";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { useRandomRecipe } from "../../hooks/useRandomRecipe";
 import { RecipeError } from "../../components/Recipe/RecipeError";
 import { RecipeNotFound } from "../../components/Recipe/RecipeNotFound";
@@ -32,11 +32,7 @@ const Explore: NextPage = () => {
 };
 
 export async function getServerSideProps(context: any) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session) {
     return {

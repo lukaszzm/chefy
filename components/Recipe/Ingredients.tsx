@@ -1,3 +1,5 @@
+import { Tag } from "../UI/Tag";
+
 interface IIngredientsProps {
   ingredientsList: string[];
   shortVersion?: boolean;
@@ -19,12 +21,7 @@ export const Ingredients: React.FC<IIngredientsProps> = (props) => {
       </h3>
       <div className="flex flex-row flex-wrap max-w-full">
         {fixedIngredientsList.map((el, index) => (
-          <div
-            key={index}
-            className="rounded-lg bg-gray-50 border p-1 text-sm m-1 flex items-center justify-center"
-          >
-            {el}
-          </div>
+          <Tag key={index}>{el}</Tag>
         ))}
       </div>
     </>

@@ -6,6 +6,8 @@ import { Preferences } from "../../components/Settings/Preferences";
 import prisma from "../../lib/prisma";
 import { IArea } from "../../interfaces/Area.interface";
 import { ICategory } from "../../interfaces/Category.interface";
+import { Title } from "../../components/UI/Title";
+import { Subtitle } from "../../components/UI/Subtitle";
 
 interface ISettingsProps {
   name: string;
@@ -21,16 +23,14 @@ const Settings: NextPage<ISettingsProps> = (props) => {
 
   return (
     <>
-      <h1 className="font-semibold text-gray-800 text-2xl capitalize mb-5">
-        Settings
-      </h1>
-      <h2 className="text-left font-semibold w-full pb-1 border-b border-b-gray-400  text-lg">
+      <Title>Settings</Title>
+      <Subtitle className="pb-1 border-b border-b-gray-400">
         General Info
-      </h2>
+      </Subtitle>
       <Account name={name} />
-      <h2 className="text-left font-semibold w-full pb-1 border-b border-b-gray-400  text-lg">
+      <Subtitle className="pb-1 border-b border-b-gray-400">
         Preferences
-      </h2>
+      </Subtitle>
       <Preferences
         allCategories={allCategories}
         allAreas={allAreas}

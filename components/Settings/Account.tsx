@@ -4,6 +4,8 @@ import { UserSettingsSchema } from "../../schemas/UserSettingsSchema";
 import { useState } from "react";
 import { IApiResponse } from "../../interfaces/ApiResponse";
 import { Alert } from "../UI/Alert";
+import { Button } from "../UI/Button";
+import { Label } from "../UI/Label";
 
 interface IAccountProps {
   name: string;
@@ -49,9 +51,7 @@ export const Account: React.FC<IAccountProps> = (props) => {
       onSubmit={handleSubmit(onSubmit)}
       className="text-left m-2 pb-2 border-b border-b-gray-200"
     >
-      <label htmlFor="name" className="p-2 font-semibold text-gray-700 ">
-        Name
-      </label>
+      <Label htmlFor="name">Name</Label>
       <input
         {...register("name")}
         type="text"
@@ -66,13 +66,9 @@ export const Account: React.FC<IAccountProps> = (props) => {
           {apiResponse.text}
         </Alert>
       )}
-      <button
-        type="submit"
-        disabled={!isValid || !isDirty || isSubmitting}
-        className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-primary w-full py-2.5 border-primary bg-primary text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-hover active:shadow-lg transition duration-150 ease-in-out"
-      >
+      <Button type="primary" disabled={!isValid || !isDirty || isSubmitting}>
         Change
-      </button>
+      </Button>
     </form>
   );
 };

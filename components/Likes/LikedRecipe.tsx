@@ -3,6 +3,7 @@ import { BiInfoCircle } from "react-icons/bi";
 import { Modal } from "../UI/Modal";
 import { useModal } from "../../hooks/useModal";
 import { RecipeDetails } from "./RecipeDetails";
+import { Button } from "../UI/Button";
 
 interface ILikedRecipe {
   id: string;
@@ -24,12 +25,13 @@ export const LikedRecipe: React.FC<ILikedRecipe> = (props) => {
           <p className="text-left p-1 font-semibold text-md">{title}</p>
           <Category noTitle category={category} area={area} />
         </div>
-        <button
+        <Button
+          type="none"
           onClick={openModal}
-          className="rounded-full p-2 text-gray-400 hover:text-gray-600 hover:scale-110 shadow-sm transition duration-150  ease-in-out"
+          className="rounded-full w-auto border-none bg-none shadow-none hover:shadow-none focus:shadow-none active:shadow-none active:text-gray-600 focus:text-gray-600  text-gray-400 hover:text-gray-600 hover:scale-110 transition duration-150  ease-in-out"
         >
           <BiInfoCircle size="34px" height="1x" />
-        </button>
+        </Button>
       </div>
       <Modal isModalOpen={isModalOpen} closeModal={closeModal} title={title}>
         <RecipeDetails
