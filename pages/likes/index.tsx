@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import prisma from "../../lib/prisma";
 import { IRecipe } from "../../interfaces/Recipe.interface";
@@ -21,6 +21,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
         recipes.map((el) => (
           <LikedRecipe
             key={el.id}
+            id={el.id}
             title={el.title}
             area={el.area.name}
             category={el.category.name}
@@ -38,11 +39,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
 };
 
 export async function getServerSideProps(context: any) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session || !session.user?.email) {
     return {

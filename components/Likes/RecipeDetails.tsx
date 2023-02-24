@@ -1,10 +1,38 @@
+import { useState } from "react";
+import { IApiResponse } from "../../interfaces/ApiResponse";
+import { Alert } from "../UI/Alert";
+import { useRouter } from "next/router";
+
 interface IRecipeDetailsProps {
+  id: string;
   ingredients: string[];
   instructions: string;
 }
 
 export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
-  const { ingredients, instructions } = props;
+  const { ingredients, instructions, id } = props;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
+  const router = useRouter();
+
+  const deleteHandler = async () => {
+    setApiResponse(null);
+    setIsSubmitting(true);
+    const response = await fetch("/api/recipes/likes", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    if (!response.ok)
+      setApiResponse({ isError: true, text: "Something went wrong." });
+
+    setIsSubmitting(false);
+    router.reload();
+  };
+
   return (
     <>
       <div className="overflow-auto h-96">
@@ -31,7 +59,14 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
       <button className="w-full p-2 mt-4 mb-2 rounded-md shadow-md bg-primary text-white font-semibold hover:bg-primary-hover transition duration-150  ease-in-out">
         Generate PDF
       </button>
-      <button className="w-full p-2 rounded-md shadow-md border border-red-400 text-red-400 font-semibold hover:bg-red-400 hover:text-white transition duration-150  ease-in-out">
+      {apiResponse && (
+        <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
+      )}
+      <button
+        disabled={isSubmitting}
+        onClick={deleteHandler}
+        className="w-full p-2 my-2 rounded-md shadow-md border border-red-400 text-red-400 font-semibold hover:bg-red-400 hover:text-white transition duration-150  ease-in-out"
+      >
         Delete from likes
       </button>
     </>

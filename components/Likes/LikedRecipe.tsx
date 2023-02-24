@@ -5,6 +5,7 @@ import { useModal } from "../../hooks/useModal";
 import { RecipeDetails } from "./RecipeDetails";
 
 interface ILikedRecipe {
+  id: string;
   title: string;
   area: string;
   category: string;
@@ -13,7 +14,7 @@ interface ILikedRecipe {
 }
 
 export const LikedRecipe: React.FC<ILikedRecipe> = (props) => {
-  const { title, area, category, ingredients, instructions } = props;
+  const { id, title, area, category, ingredients, instructions } = props;
   const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
@@ -31,7 +32,11 @@ export const LikedRecipe: React.FC<ILikedRecipe> = (props) => {
         </button>
       </div>
       <Modal isModalOpen={isModalOpen} closeModal={closeModal} title={title}>
-        <RecipeDetails ingredients={ingredients} instructions={instructions} />
+        <RecipeDetails
+          id={id}
+          ingredients={ingredients}
+          instructions={instructions}
+        />
       </Modal>
     </>
   );
