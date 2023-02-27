@@ -4,6 +4,7 @@ import { Alert } from "../UI/Alert";
 import { useRouter } from "next/router";
 import { Subtitle } from "../UI/Subtitle";
 import { Button } from "../UI/Button";
+import { Tag } from "../UI/Tag";
 
 interface IRecipeDetailsProps {
   id: string;
@@ -42,19 +43,14 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
           <Subtitle className="mb-1">Ingredients</Subtitle>
           <div className="flex flex-row flex-wrap max-w-full">
             {ingredients.map((el, index) => (
-              <div
-                key={index}
-                className="rounded-lg bg-gray-50 border p-1 text-sm m-1 flex items-center justify-center"
-              >
-                {el}
-              </div>
+              <Tag key={index}>{el}</Tag>
             ))}
           </div>
         </div>
         <div className="text-left py-2 border-b-2">
           <Subtitle className="mb-1">Instructions</Subtitle>
           <div className="flex flex-row flex-wrap max-w-full">
-            <p className="text-sm">{instructions}</p>
+            <p className="text-sm p-1">{instructions}</p>
           </div>
         </div>
       </div>

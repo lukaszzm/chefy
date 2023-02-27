@@ -10,7 +10,7 @@ export const Layout: NextPage<IDashboardLayoutProps> = (props) => {
   const { children } = props;
 
   return (
-    <div className="w-screen h-screen flex">
+    <div className="w-full h-full min-h-screen overflow-auto flex">
       <Menu />
       <Container>{children}</Container>
     </div>

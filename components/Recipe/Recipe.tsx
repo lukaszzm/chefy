@@ -58,7 +58,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
     <>
       <ImageContainer src={imageSrc} alt={title} />
       <Title className="m-2">{title}</Title>
-      <div className="overflow-auto max-h-96 mb-2">
+      <div className="overflow-auto max-h-72 mb-2">
         <Category category={category.name} area={area.name} />
         <Ingredients
           shortVersion={isShortVersion}
