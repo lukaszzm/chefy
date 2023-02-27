@@ -12,7 +12,7 @@ export const Button: React.FC<IButtonProps> = (props) => {
   const { children, className, type, disabled, onClick } = props;
 
   const style = classNames(
-    "font-semibold disabled:opacity-60 disabled:pointer-events-none py-3 text-l my-2 leading-tight rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
+    "font-semibold disabled:opacity-60 my-2 disabled:pointer-events-none py-3 text-l leading-tight rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
     {
       "border w-full border-primary bg-primary text-white hover:bg-primary-hover hover:border-primary-hover focus:bg-primary-hover focus:border-primary-hover active:bg-primary-hover active:border-primary-hover active:shadow-lg focus:shadow-lg hover:shadow-lg shadow-md":
         type === "primary",

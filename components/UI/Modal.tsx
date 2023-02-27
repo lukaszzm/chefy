@@ -21,7 +21,7 @@ export const Modal: React.FC<IModalProps> = (props) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={closeModal}
-            className="absolute z-40 inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+            className="fixed z-40 inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
           />
           <motion.div
             initial={{ y: "-75%", x: "-50%", opacity: 0 }}

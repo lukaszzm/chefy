@@ -8,7 +8,7 @@ export const Menu = () => {
 
   return (
     <>
-      <div className="h-screen overflow-y-auto overflow-x-hidden max-w-xs bg-gray-100 flex flex-col justify-start items-center shadow-xl">
+      <div className="fixed h-full px-2 w-64 bg-gray-50 flex flex-col justify-start items-center shadow-xl">
         <div className="w-full p-5 font-bold border-">
           <h1 className="font-bold text-4xl text-center">Chefy</h1>
         </div>
