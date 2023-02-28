@@ -66,7 +66,11 @@ export const Account: React.FC<IAccountProps> = (props) => {
           {apiResponse.text}
         </Alert>
       )}
-      <Button type="primary" disabled={!isValid || !isDirty || isSubmitting}>
+      <Button
+        type="primary"
+        fullWidth
+        disabled={!isValid || !isDirty || isSubmitting}
+      >
         Change
       </Button>
     </form>

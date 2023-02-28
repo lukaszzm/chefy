@@ -28,7 +28,7 @@ export const LikedRecipe: React.FC<ILikedRecipe> = (props) => {
         <Button
           type="none"
           onClick={openModal}
-          className="rounded-full w-auto border-none bg-none shadow-none hover:shadow-none focus:shadow-none active:shadow-none active:text-gray-600 focus:text-gray-600  text-gray-400 hover:text-gray-600 hover:scale-110 transition duration-150  ease-in-out"
+          className="rounded-full border-none bg-none shadow-none hover:shadow-none focus:shadow-none active:shadow-none active:text-gray-600 focus:text-gray-600  text-gray-400 hover:text-gray-600 hover:scale-110 transition duration-150  ease-in-out"
         >
           <BiInfoCircle size="34px" height="1x" />
         </Button>

@@ -63,11 +63,7 @@ export const Areas: React.FC<IAreasProps> = (props) => {
           {apiResponse.text}
         </Alert>
       )}
-      <Button
-        type="primary"
-        className="disabled:transition-none disabled:opacity-60 disabled:hover:bg-primary w-full py-2.5 border-primary bg-primary text-white font-medium text-l my-2 leading-tight rounded shadow-md hover:bg-primary-hover hover:shadow-lg focus:bg-primary-hover focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-hover active:shadow-lg transition duration-150 ease-in-out"
-        disabled={!isDirty || isSubmitting}
-      >
+      <Button type="primary" fullWidth disabled={!isDirty || isSubmitting}>
         Save changes
       </Button>
     </form>

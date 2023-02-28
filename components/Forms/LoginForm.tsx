@@ -69,7 +69,11 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
             {apiError}
           </Alert>
         )}
-        <Button type="primary" disabled={!isValid || !isDirty || isSubmitting}>
+        <Button
+          type="primary"
+          fullWidth
+          disabled={!isValid || !isDirty || isSubmitting}
+        >
           Submit
         </Button>
       </form>

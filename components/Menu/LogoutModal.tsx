@@ -16,6 +16,7 @@ export const LogoutModal: React.FC<ILogoutModalProps> = (props) => {
         <Button
           type="outline-danger"
           className="rounded-xl m-6"
+          fullWidth
           onClick={() => closeModal()}
         >
           Cancel
@@ -23,6 +24,7 @@ export const LogoutModal: React.FC<ILogoutModalProps> = (props) => {
         <Button
           type="danger"
           className="rounded-xl m-6"
+          fullWidth
           onClick={() => signOut()}
         >
           Logout

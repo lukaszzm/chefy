@@ -91,7 +91,11 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
             {apiResponse.text}
           </Alert>
         )}
-        <Button type="primary" disabled={!isDirty || !isValid || isSubmitting}>
+        <Button
+          type="primary"
+          fullWidth
+          disabled={!isDirty || !isValid || isSubmitting}
+        >
           Submit
         </Button>
       </form>

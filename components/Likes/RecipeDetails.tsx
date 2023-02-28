@@ -54,7 +54,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
           </div>
         </div>
       </div>
-      <Button type="primary" className="mt-3">
+      <Button type="primary" fullWidth className="mt-3">
         Generate PDF
       </Button>
       {apiResponse && (
@@ -64,6 +64,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
         disabled={isSubmitting}
         onClick={deleteHandler}
         type="outline-danger"
+        fullWidth
       >
         Delete from likes
       </Button>
