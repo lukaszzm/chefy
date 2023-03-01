@@ -36,7 +36,7 @@ export const generatePDF = ({
 
   doc.setFontSize(12);
   doc.text(instructions, 25, i, {
-    maxWidth: 170,
+    maxWidth: 160,
   });
 
   // FOOTER
