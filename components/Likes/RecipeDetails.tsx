@@ -5,15 +5,17 @@ import { useRouter } from "next/router";
 import { Subtitle } from "../UI/Subtitle";
 import { Button } from "../UI/Button";
 import { Tag } from "../UI/Tag";
+import { generatePDF } from "../../utils/generatePDF";
 
 interface IRecipeDetailsProps {
   id: string;
+  title: string;
   ingredients: string[];
   instructions: string;
 }
 
 export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
-  const { ingredients, instructions, id } = props;
+  const { ingredients, instructions, id, title } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
   const router = useRouter();
@@ -54,7 +56,12 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
           </div>
         </div>
       </div>
-      <Button type="primary" fullWidth className="mt-3">
+      <Button
+        type="primary"
+        fullWidth
+        className="mt-3"
+        onClick={() => generatePDF({ title, ingredients, instructions })}
+      >
         Generate PDF
       </Button>
       {apiResponse && (

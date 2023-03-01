@@ -36,6 +36,7 @@ export const LikedRecipe: React.FC<ILikedRecipe> = (props) => {
       <Modal isModalOpen={isModalOpen} closeModal={closeModal} title={title}>
         <RecipeDetails
           id={id}
+          title={title}
           ingredients={ingredients}
           instructions={instructions}
         />
