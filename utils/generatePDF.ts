@@ -42,7 +42,7 @@ export const generatePDF = ({
   // FOOTER
   doc.setTextColor(150);
   doc.setFontSize(10);
-  doc.text("Recipe from Chefy", 90, 290);
+  doc.text("Recipe from Chefy - thanks for support!", 90, 290);
 
   doc.save(`${title} CHEFY.pdf`);
 };
