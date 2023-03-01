@@ -87,7 +87,7 @@ export default async function handler(
 
     if (prefferedCategories) {
       const notPrefferedCategories = allCategoriesIds.filter(
-        (el) => !prefferedCategories.includes(el.id)
+        (el: any) => !prefferedCategories.includes(el.id)
       );
       await prisma.user.update({
         where: {
@@ -97,7 +97,7 @@ export default async function handler(
           prefferedCategories: {
             connect: prefferedCategories.map((el) => ({ id: el })) || [],
             disconnect:
-              notPrefferedCategories.map((el) => ({ id: el.id })) || [],
+              notPrefferedCategories.map((el: any) => ({ id: el.id })) || [],
           },
         },
       });
@@ -105,7 +105,7 @@ export default async function handler(
 
     if (prefferedAreas) {
       const notPrefferedAreas = allAreasIds.filter(
-        (el) => !prefferedAreas.includes(el.id)
+        (el: any) => !prefferedAreas.includes(el.id)
       );
       await prisma.user.update({
         where: {
@@ -114,7 +114,8 @@ export default async function handler(
         data: {
           prefferedAreas: {
             connect: prefferedAreas.map((el) => ({ id: el })) || [],
-            disconnect: notPrefferedAreas.map((el) => ({ id: el.id })) || [],
+            disconnect:
+              notPrefferedAreas.map((el: any) => ({ id: el.id })) || [],
           },
         },
       });
