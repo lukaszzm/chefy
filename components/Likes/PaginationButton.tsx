@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { Button } from "../UI/Button";
+import Link from "next/link";
 
 interface IPaginationButtonProps {
   children: React.ReactNode;
@@ -24,13 +25,20 @@ export const PaginationButton: React.FC<IPaginationButtonProps> = (props) => {
   };
 
   return (
-    <Button
-      onClick={clickHandler}
-      type="none"
-      disabled={disabled}
-      className={styles}
+    <Link
+      href={{
+        pathname: "/likes",
+        query: { page: toPage },
+      }}
     >
-      {children}
-    </Button>
+      <Button
+        onClick={clickHandler}
+        type="none"
+        disabled={disabled}
+        className={styles}
+      >
+        {children}
+      </Button>
+    </Link>
   );
 };

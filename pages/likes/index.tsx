@@ -10,10 +10,11 @@ import { Pagination } from "../../components/Likes/Pagination";
 interface ILikesProps {
   recipes: IRecipe[];
   currentPage: number;
+  totalPages: number;
 }
 
 const Likes: NextPage<ILikesProps> = (props) => {
-  const { recipes, currentPage } = props;
+  const { recipes, currentPage, totalPages } = props;
 
   if (recipes.length > 0)
     return (
@@ -31,6 +32,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
           />
         ))}
         <Pagination currentPage={currentPage} />
+        <p>Total Pages: {totalPages}</p>
       </>
     );
 
@@ -65,24 +67,41 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       ? parseInt(context.query.page[0]) || 1
       : parseInt(context.query.page) || 1;
 
-  const recipes = await prisma.recipe.findMany({
-    skip: (page - 1) * 5,
-    take: 5,
-    where: {
-      likers: {
-        some: {
-          email: userEmail,
+  const recipes = await prisma.$transaction([
+    prisma.recipe.count({
+      where: {
+        likers: {
+          some: {
+            email: userEmail,
+          },
         },
       },
-    },
-    include: {
-      category: true,
-      area: true,
-    },
-  });
+    }),
+    prisma.recipe.findMany({
+      skip: (page - 1) * 5,
+      take: 5,
+      where: {
+        likers: {
+          some: {
+            email: userEmail,
+          },
+        },
+      },
+      include: {
+        category: true,
+        area: true,
+      },
+    }),
+  ]);
+
+  console.log(recipes[0] / 5);
 
   return {
-    props: { recipes, currentPage: page },
+    props: {
+      recipes: recipes[1],
+      totalPages: Math.ceil(recipes[0] / 5),
+      currentPage: page,
+    },
   };
 };
 
