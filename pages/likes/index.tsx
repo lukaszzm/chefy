@@ -1,23 +1,25 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import prisma from "../../lib/prisma";
 import { IRecipe } from "../../interfaces/Recipe.interface";
 import { LikedRecipe } from "../../components/Likes/LikedRecipe";
 import { Title } from "../../components/UI/Title";
+import { Pagination } from "../../components/Likes/Pagination";
 
 interface ILikesProps {
   recipes: IRecipe[];
+  currentPage: number;
 }
 
 const Likes: NextPage<ILikesProps> = (props) => {
-  const { recipes } = props;
+  const { recipes, currentPage } = props;
 
-  return (
-    <>
-      <Title>Your liked recipes</Title>
-      {recipes.length > 0 ? (
-        recipes.map((el) => (
+  if (recipes.length > 0)
+    return (
+      <>
+        <Title>Your liked recipes</Title>
+        {recipes.map((el) => (
           <LikedRecipe
             key={el.id}
             id={el.id}
@@ -27,21 +29,28 @@ const Likes: NextPage<ILikesProps> = (props) => {
             ingredients={el.ingredients}
             instructions={el.instructions}
           />
-        ))
-      ) : (
-        <p className="font-semibold text-gray-500">
-          You don&apos;t have any recipes yet.
-        </p>
-      )}
+        ))}
+        <Pagination currentPage={currentPage} />
+      </>
+    );
+
+  return (
+    <>
+      <Title>Your liked recipes</Title>
+      <p className="font-semibold text-gray-500">
+        You don&apos;t have any recipes yet.
+      </p>
     </>
   );
 };
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
+  const userEmail = session?.user?.email;
 
-  if (!session || !session.user?.email) {
+  if (!session || !userEmail) {
     return {
+      props: {},
       redirect: {
         destination: "/",
         permament: false,
@@ -49,12 +58,20 @@ export async function getServerSideProps(context: any) {
     };
   }
 
+  let page = 1;
+
+  if (context.query.page)
+    page = Array.isArray(context.query.page)
+      ? parseInt(context.query.page[0]) || 1
+      : parseInt(context.query.page) || 1;
+
   const recipes = await prisma.recipe.findMany({
+    skip: (page - 1) * 5,
     take: 5,
     where: {
       likers: {
         some: {
-          email: session.user.email,
+          email: userEmail,
         },
       },
     },
@@ -65,8 +82,8 @@ export async function getServerSideProps(context: any) {
   });
 
   return {
-    props: { recipes },
+    props: { recipes, currentPage: page },
   };
-}
+};
 
 export default Likes;

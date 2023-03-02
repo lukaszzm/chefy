@@ -9,8 +9,6 @@ interface ITagProps {
 export const Tag: React.FC<ITagProps> = (props) => {
   const { children, className, color } = props;
 
-  console.log(color);
-
   const style = classNames(
     "font-medium text-sm p-1 h-8 m-1 border-2  rounded-lg text-center",
     {
