@@ -20,23 +20,15 @@ export const PaginationButton: React.FC<IPaginationButtonProps> = (props) => {
     }
   );
 
-  const clickHandler = () => {
-    console.log("Navigate to " + toPage);
-  };
-
   return (
     <Link
+      className={classNames({ "pointer-events-none": disabled })}
       href={{
         pathname: "/likes",
         query: { page: toPage },
       }}
     >
-      <Button
-        onClick={clickHandler}
-        type="none"
-        disabled={disabled}
-        className={styles}
-      >
+      <Button type="none" disabled={disabled} className={styles}>
         {children}
       </Button>
     </Link>

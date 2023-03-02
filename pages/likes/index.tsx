@@ -31,8 +31,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
             instructions={el.instructions}
           />
         ))}
-        <Pagination currentPage={currentPage} />
-        <p>Total Pages: {totalPages}</p>
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
       </>
     );
 
@@ -93,8 +92,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     }),
   ]);
-
-  console.log(recipes[0] / 5);
 
   return {
     props: {
