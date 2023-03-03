@@ -69,7 +69,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         <Button
           type="none"
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="font-semibold text-sm p-2 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
+          className="font-semibold text-sm p-3 m-1.5 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
         >
           {isShortVersion ? "Read More" : "Read less"}
         </Button>

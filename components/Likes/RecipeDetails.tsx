@@ -40,8 +40,8 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
 
   return (
     <>
-      <div className="overflow-auto h-96 p-2">
-        <div className="pb-2 border-b-2">
+      <div className="overflow-auto h-96 px-2">
+        <div>
           <Subtitle className="mb-1">Ingredients</Subtitle>
           <div className="flex flex-row flex-wrap max-w-full">
             {ingredients.map((el, index) => (
@@ -59,7 +59,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
       <Button
         type="primary"
         fullWidth
-        className="mt-3"
+        className="mt-6"
         onClick={() => generatePDF({ title, ingredients, instructions })}
       >
         Generate PDF
