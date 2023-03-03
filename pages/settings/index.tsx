@@ -25,27 +25,27 @@ const Settings: NextPage<ISettingsProps> = (props) => {
   return (
     <>
       <Title>Settings</Title>
-      <div className="flex flex-col lg:flex-row max-w-5xl">
-        <div className="w-full pr-4 border-r">
-          <Subtitle className="pb-1 border-b border-b-gray-400">
-            General Info
-          </Subtitle>
-          <Account name={name} />
-          <Subtitle className="pb-1 border-b border-b-gray-400">
-            Password
-          </Subtitle>
-          <Password />
+      <div className="flex flex-col xl:flex-row max-w-5xl">
+        <div className="w-full">
+          <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
+            <Subtitle>General Info</Subtitle>
+            <Account name={name} />
+          </div>
+          <div className="p-4 m-4 my-8 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
+            <Subtitle>Password</Subtitle>
+            <Password />
+          </div>
         </div>
-        <div className="w-full pl-4">
-          <Subtitle className="pb-1 border-b border-b-gray-400">
-            Preferences
-          </Subtitle>
-          <Preferences
-            allCategories={allCategories}
-            allAreas={allAreas}
-            defaultAreas={defaultAreas}
-            defaultCategories={defaultCategories}
-          />
+        <div className="w-full">
+          <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
+            <Subtitle>Preferences</Subtitle>
+            <Preferences
+              allCategories={allCategories}
+              allAreas={allAreas}
+              defaultAreas={defaultAreas}
+              defaultCategories={defaultCategories}
+            />
+          </div>
         </div>
       </div>
     </>

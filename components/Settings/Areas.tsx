@@ -42,10 +42,7 @@ export const Areas: React.FC<IAreasProps> = (props) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="text-left m-2 pb-2 border-b border-b-gray-200"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
       <Label htmlFor="Category">Areas</Label>
       <ul className="flex flex-wrap">
         {allAreas.map((el) => (
@@ -63,8 +60,12 @@ export const Areas: React.FC<IAreasProps> = (props) => {
           {apiResponse.text}
         </Alert>
       )}
-      <Button type="primary" fullWidth disabled={!isDirty || isSubmitting}>
-        Save changes
+      <Button
+        type="primary"
+        className="p-4"
+        disabled={!isDirty || isSubmitting}
+      >
+        Save
       </Button>
     </form>
   );

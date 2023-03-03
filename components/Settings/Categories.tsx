@@ -63,8 +63,12 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
           {apiResponse.text}
         </Alert>
       )}
-      <Button type="primary" fullWidth disabled={!isDirty || isSubmitting}>
-        Save changes
+      <Button
+        type="primary"
+        className="p-4"
+        disabled={!isDirty || isSubmitting}
+      >
+        Save
       </Button>
     </form>
   );

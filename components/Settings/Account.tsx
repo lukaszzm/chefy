@@ -47,16 +47,13 @@ export const Account: React.FC<IAccountProps> = (props) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="text-left m-2 pb-2 border-b border-b-gray-200"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
       <Label htmlFor="name">Name</Label>
       <input
         {...register("name")}
         type="text"
         placeholder="Your name"
-        className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
+        className={`w-full p-2 bg-gray-200 rounded border focus:outline-none ${
           errors.name ? "border-red-500" : "border-gray-200"
         }`}
       />
@@ -68,10 +65,10 @@ export const Account: React.FC<IAccountProps> = (props) => {
       )}
       <Button
         type="primary"
-        fullWidth
+        className="p-4"
         disabled={!isValid || !isDirty || isSubmitting}
       >
-        Change
+        Save
       </Button>
     </form>
   );

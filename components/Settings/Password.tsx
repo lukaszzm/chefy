@@ -45,16 +45,13 @@ export const Password: React.FC = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="text-left m-2 pb-2 border-b border-b-gray-200"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
       <Label htmlFor="currentPassword">Current Password</Label>
       <input
         {...register("currentPassword")}
         type="password"
         placeholder="********"
-        className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
+        className={`w-full p-2 bg-gray-200 rounded border focus:outline-none ${
           errors.currentPassword ? "border-red-500" : "border-gray-200"
         }`}
       />
@@ -66,7 +63,7 @@ export const Password: React.FC = () => {
         {...register("newPassword")}
         type="password"
         placeholder="********"
-        className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
+        className={`w-full p-2 bg-gray-200 rounded border focus:outline-none ${
           errors.newPassword ? "border-red-500" : "border-gray-200"
         }`}
       />
@@ -80,10 +77,10 @@ export const Password: React.FC = () => {
       )}
       <Button
         type="primary"
-        fullWidth
+        className="p-4"
         disabled={!isValid || !isDirty || isSubmitting}
       >
-        Change
+        Save
       </Button>
     </form>
   );
