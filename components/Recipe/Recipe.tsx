@@ -7,6 +7,7 @@ import { ImageContainer } from "./ImageContainer";
 import { IRecipe } from "../../interfaces/Recipe.interface";
 import { Title } from "../UI/Title";
 import { Button } from "../UI/Button";
+import { Card } from "../UI/Card";
 
 interface IRecipeProps extends IRecipe {
   refetchRecipe: () => void;
@@ -55,7 +56,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   };
 
   return (
-    <div className="max-w-sm">
+    <Card>
       <ImageContainer src={imageSrc} alt={title} />
       <Title className="m-2">{title}</Title>
       <div className="overflow-auto h-64 mb-2">
@@ -78,6 +79,6 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         onLikeClick={likeHandler}
         onCancelClick={cancelHandler}
       />
-    </div>
+    </Card>
   );
 };
