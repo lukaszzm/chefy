@@ -6,6 +6,7 @@ import { IRecipe } from "../../interfaces/Recipe.interface";
 import { LikedRecipe } from "../../components/Likes/LikedRecipe";
 import { Title } from "../../components/UI/Title";
 import { Pagination } from "../../components/Likes/Pagination";
+import { Card } from "../../components/UI/Card";
 
 interface ILikesProps {
   recipes: IRecipe[];
@@ -18,21 +19,23 @@ const Likes: NextPage<ILikesProps> = (props) => {
 
   if (recipes.length > 0)
     return (
-      <>
+      <Card>
         <Title>Your liked recipes</Title>
-        {recipes.map((el) => (
-          <LikedRecipe
-            key={el.id}
-            id={el.id}
-            title={el.title}
-            area={el.area.name}
-            category={el.category.name}
-            ingredients={el.ingredients}
-            instructions={el.instructions}
-          />
-        ))}
+        <div>
+          {recipes.map((el) => (
+            <LikedRecipe
+              key={el.id}
+              id={el.id}
+              title={el.title}
+              area={el.area.name}
+              category={el.category.name}
+              ingredients={el.ingredients}
+              instructions={el.instructions}
+            />
+          ))}
+        </div>
         <Pagination currentPage={currentPage} totalPages={totalPages} />
-      </>
+      </Card>
     );
 
   return (

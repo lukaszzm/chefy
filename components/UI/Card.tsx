@@ -6,6 +6,8 @@ export const Card: React.FC<ICardProps> = (props) => {
   const { children } = props;
 
   return (
-    <div className="w-sm max-w-sm h-[42rem] max-h-[42rem]">{children}</div>
+    <div className="flex flex-col max-w-sm w-[24rem] h-[42rem] max-h-[42rem]">
+      {children}
+    </div>
   );
 };

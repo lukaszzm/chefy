@@ -19,7 +19,7 @@ export const Pagination: React.FC<IPaginationProps> = (props) => {
   const isLastPage = currentPage === totalPages;
 
   return (
-    <div className="p-1 w-full flex justify-center items-center">
+    <div className="p-1 w-full flex justify-center items-center mt-auto">
       <PaginationButton toPage={1} disabled={isFirstPage}>
         <FiChevronsLeft />
       </PaginationButton>

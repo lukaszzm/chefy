@@ -40,8 +40,8 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
 
   return (
     <>
-      <div className="overflow-auto h-96">
-        <div className="py-2 border-b-2 border-t-2">
+      <div className="overflow-auto h-96 p-2">
+        <div className="pb-2 border-b-2">
           <Subtitle className="mb-1">Ingredients</Subtitle>
           <div className="flex flex-row flex-wrap max-w-full">
             {ingredients.map((el, index) => (
