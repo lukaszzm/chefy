@@ -69,10 +69,14 @@ export default async function handler(
       name,
       prefferedCategories,
       prefferedAreas,
+      currentPassword,
+      newPassword,
     }: {
       name: string;
       prefferedCategories: string[];
       prefferedAreas: string[];
+      currentPassword: string;
+      newPassword: string;
     } = req.body;
 
     if (name)
@@ -117,6 +121,28 @@ export default async function handler(
             disconnect:
               notPrefferedAreas.map((el: any) => ({ id: el.id })) || [],
           },
+        },
+      });
+    }
+
+    if (currentPassword && newPassword) {
+      const user = await prisma.user.findUnique({
+        where: { email: userEmail },
+      });
+
+      const result = user?.password
+        ? await bcrypt.compare(currentPassword, user.password)
+        : false;
+
+      if (!result)
+        return res.status(401).json({ message: "Invalid password." });
+
+      await prisma.user.update({
+        where: {
+          email: userEmail,
+        },
+        data: {
+          password: bcrypt.hashSync(newPassword, 10),
         },
       });
     }

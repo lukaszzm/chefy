@@ -9,10 +9,10 @@ export const Ingredients: React.FC<IIngredientsProps> = (props) => {
   const { ingredientsList, shortVersion } = props;
 
   const fixedIngredientsList = shortVersion
-    ? ingredientsList.slice(0, 3)
+    ? ingredientsList.slice(0, 2)
     : ingredientsList;
 
-  if (shortVersion) fixedIngredientsList.push("And more");
+  if (shortVersion) fixedIngredientsList.push("And more..");
 
   return (
     <>

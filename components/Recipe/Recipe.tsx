@@ -55,10 +55,10 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   };
 
   return (
-    <>
+    <div className="max-w-sm">
       <ImageContainer src={imageSrc} alt={title} />
       <Title className="m-2">{title}</Title>
-      <div className="overflow-auto max-h-72 mb-2">
+      <div className="overflow-auto h-64 mb-2">
         <Category category={category.name} area={area.name} />
         <Ingredients
           shortVersion={isShortVersion}
@@ -68,7 +68,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         <Button
           type="none"
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="font-semibold text-sm p-2 text-gray-700 bg-gray-100 px-4 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
+          className="font-semibold text-sm p-2 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
         >
           {isShortVersion ? "Read More" : "Read less"}
         </Button>
@@ -78,6 +78,6 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         onLikeClick={likeHandler}
         onCancelClick={cancelHandler}
       />
-    </>
+    </div>
   );
 };

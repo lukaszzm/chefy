@@ -8,6 +8,7 @@ import { IArea } from "../../interfaces/Area.interface";
 import { ICategory } from "../../interfaces/Category.interface";
 import { Title } from "../../components/UI/Title";
 import { Subtitle } from "../../components/UI/Subtitle";
+import { Password } from "../../components/Settings/Password";
 
 interface ISettingsProps {
   name: string;
@@ -24,19 +25,29 @@ const Settings: NextPage<ISettingsProps> = (props) => {
   return (
     <>
       <Title>Settings</Title>
-      <Subtitle className="pb-1 border-b border-b-gray-400">
-        General Info
-      </Subtitle>
-      <Account name={name} />
-      <Subtitle className="pb-1 border-b border-b-gray-400">
-        Preferences
-      </Subtitle>
-      <Preferences
-        allCategories={allCategories}
-        allAreas={allAreas}
-        defaultAreas={defaultAreas}
-        defaultCategories={defaultCategories}
-      />
+      <div className="flex flex-col lg:flex-row max-w-5xl">
+        <div className="w-full pr-4 border-r">
+          <Subtitle className="pb-1 border-b border-b-gray-400">
+            General Info
+          </Subtitle>
+          <Account name={name} />
+          <Subtitle className="pb-1 border-b border-b-gray-400">
+            Password
+          </Subtitle>
+          <Password />
+        </div>
+        <div className="w-full pl-4">
+          <Subtitle className="pb-1 border-b border-b-gray-400">
+            Preferences
+          </Subtitle>
+          <Preferences
+            allCategories={allCategories}
+            allAreas={allAreas}
+            defaultAreas={defaultAreas}
+            defaultCategories={defaultCategories}
+          />
+        </div>
+      </div>
     </>
   );
 };
