@@ -20,7 +20,7 @@ export const LikedRecipe: React.FC<ILikedRecipe> = (props) => {
 
   return (
     <>
-      <div className="flex justify-between items-center bg-gray-100 p-2 px-4 mb-4 rounded-md shadow-sm">
+      <div className="flex justify-between items-center bg-gray-100 p-2 px-4 mb-4 rounded-md shadow-sm border border-gray-200">
         <div>
           <p className="text-left p-1 font-semibold text-md">{title}</p>
           <Category noTitle category={category} area={area} />
