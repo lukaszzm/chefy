@@ -16,9 +16,7 @@ export const Ingredients: React.FC<IIngredientsProps> = (props) => {
 
   return (
     <>
-      <h3 className="text-left font-semibold mt-2 mb-1 text-gray-900">
-        Ingredients
-      </h3>
+      <h3 className="text-left font-semibold text-gray-900">Ingredients</h3>
       <div className="flex flex-row flex-wrap max-w-full">
         {fixedIngredientsList.map((el, index) => (
           <Tag key={index}>{el}</Tag>

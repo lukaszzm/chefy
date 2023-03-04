@@ -17,10 +17,10 @@ interface ILikesProps {
 const Likes: NextPage<ILikesProps> = (props) => {
   const { recipes, currentPage, totalPages } = props;
 
-  if (recipes.length > 0)
-    return (
-      <Card>
-        <Title>Your liked recipes</Title>
+  return (
+    <Card>
+      <Title className="mb-8">Your liked recipes</Title>
+      {recipes.length > 0 ? (
         <div>
           {recipes.map((el) => (
             <LikedRecipe
@@ -33,18 +33,14 @@ const Likes: NextPage<ILikesProps> = (props) => {
               instructions={el.instructions}
             />
           ))}
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
         </div>
-        <Pagination currentPage={currentPage} totalPages={totalPages} />
-      </Card>
-    );
-
-  return (
-    <>
-      <Title>Your liked recipes</Title>
-      <p className="font-semibold text-gray-500">
-        You don&apos;t have any recipes yet.
-      </p>
-    </>
+      ) : (
+        <p className="font-semibold text-gray-500 my-auto">
+          You don&apos;t have any recipes yet.
+        </p>
+      )}
+    </Card>
   );
 };
 

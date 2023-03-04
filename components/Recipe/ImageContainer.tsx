@@ -9,7 +9,7 @@ export const ImageContainer: React.FC<IImageContainerProps> = (props) => {
   const { src, alt } = props;
 
   return (
-    <div className="relative w-full h-60">
+    <div className="relative w-full h-72">
       <Image
         src={src}
         fill

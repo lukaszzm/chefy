@@ -58,7 +58,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   return (
     <Card>
       <ImageContainer src={imageSrc} alt={title} />
-      <Title className="m-2">{title}</Title>
+      <Title>{title}</Title>
       <div className="overflow-auto h-64 mb-2">
         <Category category={category.name} area={area.name} />
         <Ingredients
@@ -69,7 +69,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         <Button
           type="none"
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="font-semibold text-sm p-3 m-1.5 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
+          className="font-semibold text-sm p-3 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
         >
           {isShortVersion ? "Read More" : "Read less"}
         </Button>

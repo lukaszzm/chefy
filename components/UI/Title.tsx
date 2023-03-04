@@ -8,7 +8,7 @@ export const Title: React.FC<ITitleProps> = (props) => {
 
   return (
     <h1
-      className={`${className} font-semibold text-gray-800 text-2xl capitalize mb-5`}
+      className={`${className} font-semibold text-gray-800 text-2xl capitalize m-2`}
     >
       {children}
     </h1>
