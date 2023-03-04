@@ -12,7 +12,7 @@ export const LogoutModal: React.FC<ILogoutModalProps> = (props) => {
   return (
     <Modal isModalOpen={isModalOpen} closeModal={closeModal} title="Log out">
       <p className="text-center">Are you sure you want to log out?</p>
-      <div className="flex justify-around mt-2">
+      <div className="flex justify-between mt-2">
         <Button
           type="outline-danger"
           className="rounded-xl m-6"
