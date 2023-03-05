@@ -21,7 +21,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
     <Card>
       <Title className="mb-8">Your liked recipes</Title>
       {recipes.length > 0 ? (
-        <div>
+        <>
           {recipes.map((el) => (
             <LikedRecipe
               key={el.id}
@@ -34,7 +34,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
             />
           ))}
           <Pagination currentPage={currentPage} totalPages={totalPages} />
-        </div>
+        </>
       ) : (
         <p className="font-semibold text-gray-500 my-auto">
           You don&apos;t have any recipes yet.
