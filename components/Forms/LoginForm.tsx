@@ -37,7 +37,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
       redirect: false,
     });
 
-    if (!response?.ok)
+    if (!response || !response.ok)
       setApiResponse({
         isError: true,
         text: response?.error || "Something went wrong.",
