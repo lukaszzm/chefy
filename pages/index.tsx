@@ -6,7 +6,7 @@ import { Modal } from "../components/UI/Modal";
 import { NavBar } from "../components/Home/Navbar";
 import { Welcome } from "../components/Home/Welcome";
 import { useLoginModal } from "../hooks/useLoginModal";
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { RegisterForm } from "../components/Forms/RegisterForm";
 
@@ -51,11 +51,7 @@ const Home = () => {
 };
 
 export async function getServerSideProps(context: any) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session) {
     return {

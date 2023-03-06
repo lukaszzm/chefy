@@ -1,11 +1,8 @@
-import { yupResolver } from "@corex/hook-form-yup-resolver";
-import { useForm } from "react-hook-form";
 import { UserSettingsSchema } from "../../schemas/UserSettingsSchema";
-import { useState } from "react";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
+import { useSettingsForm } from "../../hooks/useSettingsForm";
 
 interface IAccountProps {
   name: string;
@@ -13,38 +10,16 @@ interface IAccountProps {
 
 export const Account: React.FC<IAccountProps> = (props) => {
   const { name } = props;
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
-  } = useForm<IAccountProps>({
-    resolver: yupResolver(UserSettingsSchema),
-    mode: "onChange",
-    defaultValues: {
-      name: name,
-    },
+    apiResponse,
+    onSubmit,
+  } = useSettingsForm({
+    schema: UserSettingsSchema,
+    defaultValues: { name: name },
   });
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
-
-  const onSubmit = async (values: IAccountProps) => {
-    setApiResponse(null);
-    const response = await fetch("/api/users", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-
-    if (!response.ok)
-      return setApiResponse({ isError: true, text: "Something went wrong." });
-
-    setApiResponse({
-      isError: false,
-      text: "Success! Your data has been changed. Log in again to see the changes. ",
-    });
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">

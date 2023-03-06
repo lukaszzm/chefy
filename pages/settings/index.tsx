@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { getServerSession, unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { Account } from "../../components/Settings/Account";
 import { Preferences } from "../../components/Settings/Preferences";
@@ -54,8 +54,10 @@ const Settings: NextPage<ISettingsProps> = (props) => {
 
 export async function getServerSideProps(context: any) {
   const session = await getServerSession(context.req, context.res, authOptions);
+  const userEmail = session?.user?.email;
+  const userName = session?.user?.name;
 
-  if (!session || !session.user || !session.user.email || !session.user.name) {
+  if (!session || !userEmail || !userName) {
     return {
       redirect: {
         destination: "/",
@@ -63,9 +65,6 @@ export async function getServerSideProps(context: any) {
       },
     };
   }
-
-  const userEmail = session.user.email;
-  const userName = session.user.name;
 
   const allCategories = await prisma.category.findMany();
   const allAreas = await prisma.area.findMany();

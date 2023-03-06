@@ -31,7 +31,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
 
   const onSubmit = async (values: IFormInputs) => {
     setApiResponse(null);
-    const response = await fetch("/api/users", {
+    const response = await fetch("/api/auth/sign-up", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

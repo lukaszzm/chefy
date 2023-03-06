@@ -1,12 +1,10 @@
-import { useForm } from "react-hook-form";
 import { ICategory } from "../../interfaces/Category.interface";
-import { useState } from "react";
 import { isItemChosen } from "../../utils/isItemChosen";
 import { Checkbox } from "../UI/Checkbox";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
+import { useSettingsForm } from "../../hooks/useSettingsForm";
 
 interface ICategoriesProps {
   allCategories: ICategory[];
@@ -15,31 +13,13 @@ interface ICategoriesProps {
 
 export const Categories: React.FC<ICategoriesProps> = (props) => {
   const { allCategories, checkedByDefaultCategories } = props;
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isSubmitting },
-  } = useForm();
-
-  const onSubmit = async (values: any) => {
-    setApiResponse(null);
-    const response = await fetch("/api/users", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prefferedCategories: values.items }),
-    });
-
-    if (!response.ok)
-      return setApiResponse({ isError: true, text: "Something went wrong." });
-
-    setApiResponse({
-      isError: false,
-      text: "Success! Your preferences has been changed.",
-    });
-  };
+    formState: { errors, isValid, isDirty, isSubmitting },
+    apiResponse,
+    onSubmit,
+  } = useSettingsForm({});
 
   return (
     <form
@@ -50,7 +30,7 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
       <ul className="flex flex-wrap">
         {allCategories.map((el) => (
           <Checkbox
-            {...register("items")}
+            {...register("prefferedCategories")}
             key={el.id}
             id={el.id}
             text={el.name}

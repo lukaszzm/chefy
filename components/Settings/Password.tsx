@@ -1,48 +1,19 @@
-import { yupResolver } from "@corex/hook-form-yup-resolver";
-import { useForm } from "react-hook-form";
 import { PasswordSchema } from "../../schemas/PasswordSchema";
 import { Label } from "../UI/Label";
 import { Button } from "../UI/Button";
-import { useState } from "react";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Alert } from "../UI/Alert";
-
-interface FormValues {
-  currentPassword: string;
-  newPassword: string;
-}
+import { useSettingsForm } from "../../hooks/useSettingsForm";
 
 export const Password: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isDirty, isSubmitting },
-  } = useForm<FormValues>({
-    resolver: yupResolver(PasswordSchema),
-    mode: "onChange",
+    apiResponse,
+    onSubmit,
+  } = useSettingsForm({
+    schema: PasswordSchema,
   });
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
-
-  const onSubmit = async (values: FormValues) => {
-    setApiResponse(null);
-    const response = await fetch("/api/users", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    });
-
-    if (!response.ok) {
-      const data = await response.json();
-      return setApiResponse({ isError: true, text: data.message });
-    }
-
-    setApiResponse({
-      isError: false,
-      text: "Success! Your password has been changed. ",
-    });
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">

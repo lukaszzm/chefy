@@ -94,7 +94,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const pageCount = Math.ceil(recipes[0] / 5);
 
-  if (page > pageCount)
+  if (pageCount > 0 && page > pageCount)
     return {
       props: {},
       redirect: {

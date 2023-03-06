@@ -1,12 +1,10 @@
-import { useState } from "react";
 import { IArea } from "../../interfaces/Area.interface";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
-import { useForm } from "react-hook-form";
 import { Checkbox } from "../UI/Checkbox";
 import { isItemChosen } from "../../utils/isItemChosen";
 import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
+import { useSettingsForm } from "../../hooks/useSettingsForm";
 
 interface IAreasProps {
   allAreas: IArea[];
@@ -15,31 +13,13 @@ interface IAreasProps {
 
 export const Areas: React.FC<IAreasProps> = (props) => {
   const { allAreas, checkedByDefaultAreas } = props;
-  const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isSubmitting },
-  } = useForm();
-
-  const onSubmit = async (values: any) => {
-    setApiResponse(null);
-    const response = await fetch("/api/users", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ prefferedAreas: values.items }),
-    });
-
-    if (!response.ok)
-      return setApiResponse({ isError: true, text: "Something went wrong." });
-
-    setApiResponse({
-      isError: false,
-      text: "Success! Your preferences has been changed.",
-    });
-  };
+    formState: { errors, isValid, isDirty, isSubmitting },
+    apiResponse,
+    onSubmit,
+  } = useSettingsForm({});
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
@@ -47,7 +27,7 @@ export const Areas: React.FC<IAreasProps> = (props) => {
       <ul className="flex flex-wrap">
         {allAreas.map((el) => (
           <Checkbox
-            {...register("items")}
+            {...register("prefferedAreas")}
             key={el.id}
             id={el.id}
             text={el.name}
