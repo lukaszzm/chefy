@@ -6,6 +6,7 @@ import { signIn } from "next-auth/react";
 import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
+import { IApiResponse } from "../../interfaces/ApiResponse";
 
 interface ILoginFormProps {
   switchModal: () => void;
@@ -26,7 +27,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
     resolver: yupResolver(LoginSchema),
     mode: "onChange",
   });
-  const [apiError, setApiError] = useState<string | null>(null);
+  const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
 
   const onSubmit = async (values: IFormInputs) => {
     const { email, password } = values;
@@ -36,7 +37,11 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
       redirect: false,
     });
 
-    if (!response?.ok) setApiError(response?.error || "Something went wrong.");
+    if (!response?.ok)
+      setApiResponse({
+        isError: true,
+        text: response?.error || "Something went wrong.",
+      });
   };
 
   return (
@@ -64,9 +69,9 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
           }`}
         />
         <p className="text-red-500 px-1 text-xs">{errors.password?.message}</p>
-        {apiError && (
+        {apiResponse && (
           <Alert className="mt-2" isError>
-            {apiError}
+            {apiResponse.text}
           </Alert>
         )}
         <Button

@@ -12,7 +12,7 @@ export const Welcome: React.FC<IWelcomeProps> = (props) => {
 
   return (
     <div className="w-full h-full md:h-screen overflow-auto flex items-center justify-center">
-      <div className="flex mt-20 flex-col-reverse lg:flex-row justify-between items-center lg:gap-4 overflow-x-hidden md:overflow-x-auto">
+      <div className="flex mt-20 p-8 flex-col-reverse lg:flex-row justify-between items-center lg:gap-4 overflow-x-hidden md:overflow-x-auto">
         <motion.div
           initial={{ x: "50%", opacity: 0 }}
           animate={{ x: "0%", opacity: 1 }}
