@@ -105,7 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      pagesCount: pageCount,
+      pageCount: pageCount,
       recipes: recipes[1],
       currentPage: page,
     },
