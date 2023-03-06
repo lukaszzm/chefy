@@ -18,32 +18,40 @@ export default async function handler(
   }
 
   if (req.method === "POST")
-    await prisma.user.update({
-      where: {
-        email: userEmail,
-      },
-      data: {
-        likedRecipes: {
-          connect: {
-            id: req.body.id,
+    try {
+      await prisma.user.update({
+        where: {
+          email: userEmail,
+        },
+        data: {
+          likedRecipes: {
+            connect: {
+              id: req.body.id,
+            },
           },
         },
-      },
-    });
+      });
+      return res.status(200).end();
+    } catch (err) {
+      return res.status(500).json({ message: "Something went wrong." });
+    }
 
   if (req.method === "DELETE")
-    await prisma.user.update({
-      where: {
-        email: userEmail,
-      },
-      data: {
-        likedRecipes: {
-          disconnect: {
-            id: req.body.id,
+    try {
+      await prisma.user.update({
+        where: {
+          email: userEmail,
+        },
+        data: {
+          likedRecipes: {
+            disconnect: {
+              id: req.body.id,
+            },
           },
         },
-      },
-    });
-
-  return res.status(200).end();
+      });
+      return res.status(200).end();
+    } catch (err) {
+      return res.status(500).json({ message: "Something went wrong." });
+    }
 }

@@ -7,8 +7,6 @@ import { IApiResponse } from "../interfaces/ApiResponse.interface";
 interface InitialProps {
   schema?: Yup.AnyObjectSchema;
   defaultValues?: any;
-  successMessage?: string;
-  errorMessage?: string;
 }
 
 interface FormValues {
@@ -20,7 +18,7 @@ interface FormValues {
 }
 
 export const useSettingsForm = (props: InitialProps) => {
-  const { schema, defaultValues, successMessage, errorMessage } = props;
+  const { schema, defaultValues } = props;
 
   const {
     register,
@@ -42,16 +40,17 @@ export const useSettingsForm = (props: InitialProps) => {
       },
       body: JSON.stringify(values),
     });
+    const data = await response.json();
 
     if (!response.ok)
       return setApiResponse({
         isError: true,
-        text: errorMessage || "Something went wrong.",
+        text: data.message || "Something went wrong.",
       });
 
     setApiResponse({
       isError: false,
-      text: successMessage || "Success! Your data has been changed. ",
+      text: data.message || "Success! Your data has been changed. ",
     });
   };
 

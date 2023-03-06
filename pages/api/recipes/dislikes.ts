@@ -17,18 +17,21 @@ export default async function handler(
     return res.status(401).end();
   }
 
-  await prisma.user.update({
-    where: {
-      email: userEmail,
-    },
-    data: {
-      dislikedRecipes: {
-        connect: {
-          id: req.body.id,
+  try {
+    await prisma.user.update({
+      where: {
+        email: userEmail,
+      },
+      data: {
+        dislikedRecipes: {
+          connect: {
+            id: req.body.id,
+          },
         },
       },
-    },
-  });
-
-  return res.status(200).end();
+    });
+    return res.status(200).end();
+  } catch (err) {
+    return res.status(500).json({ message: "Something went wrong." });
+  }
 }

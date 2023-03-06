@@ -18,36 +18,42 @@ export default async function handler(
   const { email, name, password }: ICredentials = req.body;
   const fixedEmail = email.toLowerCase();
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: fixedEmail,
-    },
-  });
-
-  if (user)
-    return res.status(409).json({ message: "This email is already used." });
-
-  const allCategoriesIds = await prisma.category.findMany({
-    select: { id: true },
-  });
-
-  const allAreasIds = await prisma.area.findMany({
-    select: { id: true },
-  });
-
-  await prisma.user.create({
-    data: {
-      email: fixedEmail,
-      name: name,
-      password: bcrypt.hashSync(password, 10),
-      prefferedCategories: {
-        connect: allCategoriesIds,
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: fixedEmail,
       },
-      prefferedAreas: {
-        connect: allAreasIds,
-      },
-    },
-  });
+    });
 
-  return res.status(201).json({ message: "Success! Successfully registered." });
+    if (user)
+      return res.status(409).json({ message: "This email is already used." });
+
+    const allCategoriesIds = await prisma.category.findMany({
+      select: { id: true },
+    });
+
+    const allAreasIds = await prisma.area.findMany({
+      select: { id: true },
+    });
+
+    await prisma.user.create({
+      data: {
+        email: fixedEmail,
+        name: name,
+        password: bcrypt.hashSync(password, 10),
+        prefferedCategories: {
+          connect: allCategoriesIds,
+        },
+        prefferedAreas: {
+          connect: allAreasIds,
+        },
+      },
+    });
+
+    return res
+      .status(201)
+      .json({ message: "Success! Successfully registered." });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong." });
+  }
 }

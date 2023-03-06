@@ -32,83 +32,105 @@ export default async function handler(
     newPassword: string;
   } = req.body;
 
-  if (name)
-    await prisma.user.update({
-      where: {
-        email: userEmail,
-      },
-      data: {
-        name,
-      },
-    });
-
-  if (prefferedCategories) {
-    const allCategoriesIds = await prisma.category.findMany({
-      select: { id: true },
-    });
-
-    const notPrefferedCategories = allCategoriesIds.filter(
-      (el: { id: string }) => !prefferedCategories.includes(el.id)
-    );
-
-    await prisma.user.update({
-      where: {
-        email: userEmail,
-      },
-      data: {
-        prefferedCategories: {
-          connect: prefferedCategories.map((el) => ({ id: el })) || [],
-          disconnect:
-            notPrefferedCategories.map((el: any) => ({ id: el.id })) || [],
+  try {
+    if (name) {
+      await prisma.user.update({
+        where: {
+          email: userEmail,
         },
-      },
-    });
-  }
-
-  if (prefferedAreas) {
-    const allAreasIds = await prisma.area.findMany({
-      select: { id: true },
-    });
-
-    const notPrefferedAreas = allAreasIds.filter(
-      (el: { id: string }) => !prefferedAreas.includes(el.id)
-    );
-
-    await prisma.user.update({
-      where: {
-        email: userEmail,
-      },
-      data: {
-        prefferedAreas: {
-          connect: prefferedAreas.map((el) => ({ id: el })) || [],
-          disconnect: notPrefferedAreas.map((el: any) => ({ id: el.id })) || [],
+        data: {
+          name,
         },
-      },
-    });
+      });
+      return res
+        .status(200)
+        .json({ message: "Success! Your name has been changed." });
+    }
+
+    if (prefferedCategories) {
+      const allCategoriesIds = await prisma.category.findMany({
+        select: { id: true },
+      });
+
+      const notPrefferedCategories = allCategoriesIds.filter(
+        (el: { id: string }) => !prefferedCategories.includes(el.id)
+      );
+
+      await prisma.user.update({
+        where: {
+          email: userEmail,
+        },
+        data: {
+          prefferedCategories: {
+            connect: prefferedCategories.map((el) => ({ id: el })) || [],
+            disconnect:
+              notPrefferedCategories.map((el: any) => ({ id: el.id })) || [],
+          },
+        },
+      });
+
+      return res
+        .status(200)
+        .json({
+          message: "Success! Your preffered categories has been changed.",
+        });
+    }
+
+    if (prefferedAreas) {
+      const allAreasIds = await prisma.area.findMany({
+        select: { id: true },
+      });
+
+      const notPrefferedAreas = allAreasIds.filter(
+        (el: { id: string }) => !prefferedAreas.includes(el.id)
+      );
+
+      await prisma.user.update({
+        where: {
+          email: userEmail,
+        },
+        data: {
+          prefferedAreas: {
+            connect: prefferedAreas.map((el) => ({ id: el })) || [],
+            disconnect:
+              notPrefferedAreas.map((el: any) => ({ id: el.id })) || [],
+          },
+        },
+      });
+
+      return res
+        .status(200)
+        .json({ message: "Success! Your preffered areas has been changed." });
+    }
+
+    if (currentPassword && newPassword) {
+      const user = await prisma.user.findUnique({
+        where: { email: userEmail },
+      });
+
+      if (!user) throw new Error("Cannot find the user.");
+
+      const result = user.password
+        ? await bcrypt.compare(currentPassword, user.password)
+        : false;
+
+      if (!result)
+        return res.status(401).json({ message: "Invalid password." });
+
+      await prisma.user.update({
+        where: {
+          email: userEmail,
+        },
+        data: {
+          password: bcrypt.hashSync(newPassword, 10),
+        },
+      });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Success! Your password has been changed." });
+  } catch (err) {
+    return res.status(500).json({ message: "Something went wrong." });
   }
-
-  if (currentPassword && newPassword) {
-    const user = await prisma.user.findUnique({
-      where: { email: userEmail },
-    });
-
-    if (!user) throw new Error("Cannot find the user.");
-
-    const result = user.password
-      ? await bcrypt.compare(currentPassword, user.password)
-      : false;
-
-    if (!result) return res.status(401).json({ message: "Invalid password." });
-
-    await prisma.user.update({
-      where: {
-        email: userEmail,
-      },
-      data: {
-        password: bcrypt.hashSync(newPassword, 10),
-      },
-    });
-  }
-
-  return res.status(204).end();
 }
