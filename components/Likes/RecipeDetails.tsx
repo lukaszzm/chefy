@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { IApiResponse } from "../../interfaces/ApiResponse";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Alert } from "../UI/Alert";
-import { useRouter } from "next/router";
 import { Subtitle } from "../UI/Subtitle";
 import { Button } from "../UI/Button";
 import { Tag } from "../UI/Tag";
 import { generatePDF } from "../../utils/generatePDF";
+import { useRouter } from "next/router";
 
 interface IRecipeDetailsProps {
   id: string;
@@ -19,6 +19,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>();
   const router = useRouter();
+  const { asPath } = router;
 
   const deleteHandler = async () => {
     setApiResponse(null);
@@ -35,7 +36,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
       setApiResponse({ isError: true, text: "Something went wrong." });
 
     setIsSubmitting(false);
-    router.reload();
+    router.replace(asPath);
   };
 
   return (

@@ -11,7 +11,7 @@ export const RecipeError = () => {
           <h3>Try again later.</h3>
         </div>
       </div>
-      <Buttons isSubmitting />
+      <Buttons disabled />
     </Card>
   );
 };

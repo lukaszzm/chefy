@@ -20,7 +20,6 @@ export const Logo: React.FC<ILogoProps> = (props) => {
       <Image
         src={icon}
         alt="icon"
-        priority
         height={36}
         width={36}
         style={{ marginTop: "0.2rem", marginRight: "0.5rem" }}

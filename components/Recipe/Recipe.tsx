@@ -8,6 +8,8 @@ import { IRecipe } from "../../interfaces/Recipe.interface";
 import { Title } from "../UI/Title";
 import { Button } from "../UI/Button";
 import { Card } from "../UI/Card";
+import { Alert } from "../UI/Alert";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 
 interface IRecipeProps extends IRecipe {
   refetchRecipe: () => void;
@@ -26,33 +28,27 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   } = props;
   const [isShortVersion, setIsShortVersion] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
 
-  const likeHandler = async () => {
+  const likeHandler = async () => sendRequest("/api/recipes/likes");
+
+  const dislikeHandler = () => sendRequest("/api/recipes/dislikes");
+
+  const sendRequest = async (url: string) => {
     setIsSubmitting(true);
-    const response = await fetch("/api/recipes/likes", {
+    const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify({ id }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-
     setIsSubmitting(false);
-    if (response.ok) refetchRecipe();
-  };
 
-  const cancelHandler = async () => {
-    setIsSubmitting(true);
-    const response = await fetch("/api/recipes/dislikes", {
-      method: "POST",
-      body: JSON.stringify({ id }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (!response.ok)
+      return setApiResponse({ isError: true, text: "Something went wrong." });
 
-    setIsSubmitting(false);
-    if (response.ok) refetchRecipe();
+    refetchRecipe();
   };
 
   return (
@@ -74,10 +70,11 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
           {isShortVersion ? "Read More" : "Read less"}
         </Button>
       </div>
+      {apiResponse && <Alert isError={true}>{apiResponse.text}</Alert>}
       <Buttons
-        isSubmitting={isSubmitting}
-        onLikeClick={likeHandler}
-        onCancelClick={cancelHandler}
+        disabled={isSubmitting}
+        likeHandler={likeHandler}
+        dislikeHandler={dislikeHandler}
       />
     </Card>
   );

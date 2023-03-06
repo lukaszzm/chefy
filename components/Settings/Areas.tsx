@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IArea } from "../../interfaces/Area.interface";
-import { IApiResponse } from "../../interfaces/ApiResponse";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { useForm } from "react-hook-form";
 import { Checkbox } from "../UI/Checkbox";
 import { isItemChosen } from "../../utils/isItemChosen";

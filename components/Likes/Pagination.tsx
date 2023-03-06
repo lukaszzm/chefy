@@ -9,14 +9,14 @@ import { PaginationButton } from "./PaginationButton";
 
 interface IPaginationProps {
   currentPage: number;
-  totalPages: number;
+  pageCount: number;
 }
 
 export const Pagination: React.FC<IPaginationProps> = (props) => {
-  const { currentPage, totalPages } = props;
+  const { currentPage, pageCount } = props;
 
   const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === totalPages;
+  const isLastPage = currentPage === pageCount;
 
   return (
     <div className="p-1 w-full flex justify-center items-center mt-auto">
@@ -44,7 +44,7 @@ export const Pagination: React.FC<IPaginationProps> = (props) => {
           {currentPage + 1}
         </PaginationButton>
       )}
-      {currentPage + 1 < totalPages && (
+      {currentPage + 1 < pageCount && (
         <div className="m-2">
           <FiMoreHorizontal />
         </div>
@@ -52,7 +52,7 @@ export const Pagination: React.FC<IPaginationProps> = (props) => {
       <PaginationButton toPage={currentPage + 1} disabled={isLastPage}>
         <FiChevronRight />
       </PaginationButton>
-      <PaginationButton toPage={totalPages} disabled={isLastPage}>
+      <PaginationButton toPage={pageCount} disabled={isLastPage}>
         <FiChevronsRight />
       </PaginationButton>
     </div>

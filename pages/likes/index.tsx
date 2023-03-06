@@ -11,11 +11,11 @@ import { Card } from "../../components/UI/Card";
 interface ILikesProps {
   recipes: IRecipe[];
   currentPage: number;
-  totalPages: number;
+  pageCount: number;
 }
 
 const Likes: NextPage<ILikesProps> = (props) => {
-  const { recipes, currentPage, totalPages } = props;
+  const { recipes, currentPage, pageCount } = props;
 
   return (
     <Card>
@@ -33,7 +33,7 @@ const Likes: NextPage<ILikesProps> = (props) => {
               instructions={el.instructions}
             />
           ))}
-          <Pagination currentPage={currentPage} totalPages={totalPages} />
+          <Pagination currentPage={currentPage} pageCount={pageCount} />
         </>
       ) : (
         <p className="font-semibold text-gray-500 my-auto">
@@ -92,10 +92,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }),
   ]);
 
+  const pageCount = Math.ceil(recipes[0] / 5);
+
+  if (page > pageCount)
+    return {
+      props: {},
+      redirect: {
+        destination: `/likes?page=${pageCount}`,
+        permament: true,
+      },
+    };
+
   return {
     props: {
+      pagesCount: pageCount,
       recipes: recipes[1],
-      totalPages: Math.ceil(recipes[0] / 5),
       currentPage: page,
     },
   };

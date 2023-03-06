@@ -3,7 +3,7 @@ import { ICategory } from "../../interfaces/Category.interface";
 import { useState } from "react";
 import { isItemChosen } from "../../utils/isItemChosen";
 import { Checkbox } from "../UI/Checkbox";
-import { IApiResponse } from "../../interfaces/ApiResponse";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";

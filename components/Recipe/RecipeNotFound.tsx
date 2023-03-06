@@ -13,7 +13,7 @@ export const RecipeNotFound = () => {
           </p>
         </div>
       </div>
-      <Buttons isSubmitting />
+      <Buttons disabled />
     </Card>
   );
 };

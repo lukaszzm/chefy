@@ -2,7 +2,7 @@ import { yupResolver } from "@corex/hook-form-yup-resolver";
 import { useForm } from "react-hook-form";
 import { UserSettingsSchema } from "../../schemas/UserSettingsSchema";
 import { useState } from "react";
-import { IApiResponse } from "../../interfaces/ApiResponse";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";

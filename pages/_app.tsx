@@ -7,29 +7,20 @@ import { Layout } from "../layout/Layout";
 const protectedRoutes = ["/explore", "/likes", "/settings"];
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  if (protectedRoutes.includes(router.pathname)) {
-    return (
-      <SessionProvider session={pageProps.session}>
-        <Layout>
-          <Head>
-            <title>Chefy</title>
-            <meta name="description" content="Chefy - We love cooking" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          <Component {...pageProps} />
-        </Layout>
-      </SessionProvider>
-    );
-  }
-
   return (
     <SessionProvider session={pageProps.session}>
       <Head>
         <title>Chefy</title>
-        <meta name="description" content="Chefy - We love cooking" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Chefy - Because we love cooking" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
-      <Component {...pageProps} />
+      {protectedRoutes.includes(router.pathname) ? (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      ) : (
+        <Component {...pageProps} />
+      )}
     </SessionProvider>
   );
 }

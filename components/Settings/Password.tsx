@@ -4,7 +4,7 @@ import { PasswordSchema } from "../../schemas/PasswordSchema";
 import { Label } from "../UI/Label";
 import { Button } from "../UI/Button";
 import { useState } from "react";
-import { IApiResponse } from "../../interfaces/ApiResponse";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Alert } from "../UI/Alert";
 
 interface FormValues {

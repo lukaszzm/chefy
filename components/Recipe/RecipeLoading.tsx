@@ -12,7 +12,7 @@ export const RecipeLoading = () => {
       <div className="my-1 w-16 h-6 bg-gray-200 animate-pulse rounded-md"></div>
       <div className="my-2 w-44 h-8 bg-gray-200 animate-pulse rounded-md"></div>
       <div className="my-2 mb-2 w-full h-28 bg-gray-200 animate-pulse rounded-md"></div>
-      <Buttons isSubmitting />
+      <Buttons disabled />
     </Card>
   );
 };

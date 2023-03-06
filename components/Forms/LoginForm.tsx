@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
-import { IApiResponse } from "../../interfaces/ApiResponse";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 
 interface ILoginFormProps {
   switchModal: () => void;

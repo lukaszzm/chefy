@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { RegisterSchema } from "../../schemas/RegisterSchema";
 import { useState } from "react";
 import { Alert } from "../UI/Alert";
-import { IApiResponse } from "../../interfaces/ApiResponse";
+import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
 
