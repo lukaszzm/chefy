@@ -1,11 +1,10 @@
-import { Card } from "../UI/Card";
 import { Subtitle } from "../UI/Subtitle";
 import { Buttons } from "./Buttons";
 
 export const RecipeNotFound = () => {
   return (
-    <Card>
-      <div className="flex justify-center items-center w-[24rem] h-[34rem] bg-gray-100 rounded-md mb-5">
+    <>
+      <div className="flex justify-center items-center w-full h-[37rem] sm:h-[43rem] bg-gray-100 rounded-md mb-6">
         <div>
           <Subtitle className="text-center">No more recipes found.</Subtitle>
           <p className="p-2 text-gray-700 text-base m-0">
@@ -14,6 +13,6 @@ export const RecipeNotFound = () => {
         </div>
       </div>
       <Buttons disabled />
-    </Card>
+    </>
   );
 };

@@ -3,11 +3,10 @@ import { Ingredients } from "./Ingredients";
 import { Instruction } from "./Instruction";
 import { Buttons } from "./Buttons";
 import { Category } from "./Category";
-import { ImageContainer } from "./ImageContainer";
+import { ResponsiveImage } from "../UI/ResponsiveImage";
 import { IRecipe } from "../../interfaces/Recipe.interface";
 import { Title } from "../UI/Title";
 import { Button } from "../UI/Button";
-import { Card } from "../UI/Card";
 import { Alert } from "../UI/Alert";
 import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 
@@ -52,8 +51,8 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   };
 
   return (
-    <Card>
-      <ImageContainer src={imageSrc} alt={title} />
+    <>
+      <ResponsiveImage src={imageSrc} alt={title} />
       <Title>{title}</Title>
       <div className="overflow-auto h-64 mb-2">
         <Category category={category.name} area={area.name} />
@@ -65,7 +64,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         <Button
           type="none"
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="font-semibold text-sm p-3 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
+          className="font-semibold text-sm p-3 m-2 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
         >
           {isShortVersion ? "Read More" : "Read less"}
         </Button>
@@ -76,6 +75,6 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         likeHandler={likeHandler}
         dislikeHandler={dislikeHandler}
       />
-    </Card>
+    </>
   );
 };
