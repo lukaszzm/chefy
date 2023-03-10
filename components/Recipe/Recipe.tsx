@@ -9,6 +9,7 @@ import { Title } from "../UI/Title";
 import { Button } from "../UI/Button";
 import { Alert } from "../UI/Alert";
 import { IApiResponse } from "../../interfaces/ApiResponse.interface";
+import { Card } from "../UI/Card";
 
 interface IRecipeProps extends IRecipe {
   refetchRecipe: () => void;
@@ -51,7 +52,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   };
 
   return (
-    <>
+    <Card>
       <ResponsiveImage src={imageSrc} alt={title} />
       <Title>{title}</Title>
       <div className="overflow-auto h-64 mb-2">
@@ -75,6 +76,6 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         likeHandler={likeHandler}
         dislikeHandler={dislikeHandler}
       />
-    </>
+    </Card>
   );
 };

@@ -9,13 +9,8 @@ export const ResponsiveImage: React.FC<IResonsiveImageProps> = (props) => {
   const { src, alt } = props;
 
   return (
-    <Image
-      alt={alt}
-      src={src}
-      width={700}
-      height={475}
-      sizes="24rem"
-      className="w-2/3 rounded-lg sm:w-full m-auto border border-gray-400 h-auto object-cover"
-    />
+    <div className="relative w-72 m-auto h-72 sm:h-[17rem] border bg-gray-200 border-gray-400 rounded-md">
+      <Image alt={alt} src={src} fill className="object-cover rounded-md" />
+    </div>
   );
 };

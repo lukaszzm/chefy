@@ -1,0 +1,9 @@
+interface ICardProps {
+  children: React.ReactNode;
+}
+
+export const Card: React.FC<ICardProps> = (props) => {
+  const { children } = props;
+
+  return <div className="max-h-[72rem] sm:max-h-auto">{children}</div>;
+};
