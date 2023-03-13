@@ -9,13 +9,11 @@ export const NavBar: React.FC<INavBarProps> = (props) => {
   const { openLoginModal } = props;
 
   return (
-    <div className="fixed h-22 flex bg-gray-100 z-20 flex-wrap justify-between items-center p-2 px-4 w-full font-medium text-xl border-b-2">
+    <nav className="w-full h-24 px-6 mx-auto max-w-5xl flex justify-between items-center font-medium text-xl">
       <Logo />
-      <div className="flex items-center">
-        <Button type="primary" onClick={openLoginModal} className="px-6">
-          Login
-        </Button>
-      </div>
-    </div>
+      <Button type="primary" onClick={openLoginModal} className="px-6">
+        Login
+      </Button>
+    </nav>
   );
 };

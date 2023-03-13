@@ -1,7 +1,7 @@
 import { Button } from "../UI/Button";
 import { Title } from "../UI/Title";
-import { motion } from "framer-motion";
-import { SVG } from "./SVG";
+import { Subtitle } from "../UI/Subtitle";
+import { FoodIcons } from "./FoodIcons";
 
 interface IWelcomeProps {
   openModal: () => void;
@@ -11,30 +11,25 @@ export const Welcome: React.FC<IWelcomeProps> = (props) => {
   const { openModal } = props;
 
   return (
-    <div className="w-full h-full md:h-screen overflow-auto flex items-center justify-center">
-      <div className="flex mt-20 p-8 flex-col-reverse lg:flex-row justify-between items-center lg:gap-4 overflow-x-hidden md:overflow-x-auto">
-        <motion.div
-          initial={{ x: "50%", opacity: 0 }}
-          animate={{ x: "0%", opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.5 }}
-          className="text-left py-8"
-        >
-          <Title className="text-6xl lg:text-8xl">Let&apos;s swipe!</Title>
-          <p className="text-xl lg:text-3xl text-gray-600 mb-6">
-            To discover new lovely recipes...
-          </p>
-          <Button
-            type="primary"
-            fullWidth
-            onClick={openModal}
-            className="w-64 uppercase"
-          >
-            Sign up now
-          </Button>
-        </motion.div>
-        <div className="z-10 bg-gray-200 rounded-full m-4">
-          <SVG />
-        </div>
+    <div className="w-full h-full overflow-auto flex items-center justify-center text-center">
+      <div className="max-w-4xl p-6">
+        <Title className="text-7xl sm:text-8xl font-extrabold mx-2 mb-12">
+          Welcome to our{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-hover">
+            recipe{" "}
+          </span>
+          app!
+        </Title>
+        <Subtitle className="text-xl text-center font-normal lg:text-2xl text-gray-600 my-6">
+          We&apos;re excited to help you discover new and delicious recipes with
+          just a swipe of your finger. Our app is designed to make meal planning
+          and cooking easy and fun, with a wide variety of recipes from all over
+          the world.
+        </Subtitle>
+        <FoodIcons />
+        <Button type="primary" onClick={openModal} className="w-64 capitalize">
+          Get started
+        </Button>
       </div>
     </div>
   );

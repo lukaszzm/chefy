@@ -43,6 +43,8 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
         isError: true,
         text: response?.error || "Something went wrong.",
       });
+
+    console.log(response);
   };
 
   return (
