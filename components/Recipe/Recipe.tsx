@@ -53,7 +53,7 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
 
   return (
     <Card>
-      <div className="h-[36rem] overflow-auto">
+      <div className="h-fit overflow-auto">
         <ResponsiveImage src={imageSrc} alt={title} />
         <Title>{title}</Title>
         <Category category={category.name} area={area.name} />
