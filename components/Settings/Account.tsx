@@ -3,6 +3,7 @@ import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
 import { useSettingsForm } from "../../hooks/useSettingsForm";
+import { Input } from "../UI/Input";
 
 interface IAccountProps {
   name: string;
@@ -24,15 +25,12 @@ export const Account: React.FC<IAccountProps> = (props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
       <Label htmlFor="name">Name</Label>
-      <input
+      <Input
         {...register("name")}
         type="text"
         placeholder="Your name"
-        className={`w-full p-2 bg-gray-200 rounded border focus:outline-none ${
-          errors.name ? "border-red-500" : "border-gray-200"
-        }`}
+        error={errors.name}
       />
-      <p className="text-red-500 px-1 text-xs mb-2">{errors.name?.message}</p>
       {apiResponse && (
         <Alert isError={apiResponse.isError} className="mt-2">
           {apiResponse.text}
@@ -40,8 +38,9 @@ export const Account: React.FC<IAccountProps> = (props) => {
       )}
       <Button
         type="primary"
-        className="p-4"
-        disabled={!isValid || !isDirty || isSubmitting}
+        className="p-4 w-24"
+        disabled={!isValid || !isDirty}
+        isLoading={isSubmitting}
       >
         Save
       </Button>

@@ -7,6 +7,7 @@ import { Alert } from "../UI/Alert";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
 import { IApiResponse } from "../../interfaces/ApiResponse.interface";
+import { Input } from "../UI/Input";
 
 interface ILoginFormProps {
   switchModal: () => void;
@@ -50,25 +51,19 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
         <Label htmlFor="email" className="p-1 font-semibold">
           Email
         </Label>
-        <input
+        <Input
           {...register("email")}
           type="email"
           placeholder="example@example.com"
-          className={`w-full p-2 mb-1 bg-gray-100 rounded border focus:outline-none ${
-            errors.email ? "border-red-500" : "border-gray-200"
-          }`}
+          error={errors.email}
         />
-        <p className="text-red-500 px-1 text-xs">{errors.email?.message}</p>
         <Label htmlFor="password">Password</Label>
-        <input
+        <Input
           {...register("password")}
           type="password"
-          placeholder="Your password"
-          className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
-            errors.password ? "border-red-500" : "border-gray-200"
-          }`}
+          placeholder="********"
+          error={errors.password}
         />
-        <p className="text-red-500 px-1 text-xs">{errors.password?.message}</p>
         {apiResponse && (
           <Alert className="mt-2" isError>
             {apiResponse.text}
@@ -77,7 +72,8 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
         <Button
           type="primary"
           fullWidth
-          disabled={!isValid || !isDirty || isSubmitting}
+          disabled={!isValid || !isDirty}
+          isLoading={isSubmitting}
         >
           Submit
         </Button>

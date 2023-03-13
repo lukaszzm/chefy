@@ -16,7 +16,7 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitting },
+    formState: { isDirty, isSubmitting },
     apiResponse,
     onSubmit,
   } = useSettingsForm({});
@@ -45,8 +45,9 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
       )}
       <Button
         type="primary"
-        className="p-4"
-        disabled={!isDirty || isSubmitting}
+        className="p-4 w-24"
+        disabled={!isDirty}
+        isLoading={isSubmitting}
       >
         Save
       </Button>

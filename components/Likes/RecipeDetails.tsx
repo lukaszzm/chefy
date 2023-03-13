@@ -32,8 +32,11 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
       body: JSON.stringify({ id }),
     });
 
-    if (!response.ok)
+    if (!response.ok) {
       setApiResponse({ isError: true, text: "Something went wrong." });
+      setIsSubmitting(false);
+      return;
+    }
 
     setIsSubmitting(false);
     router.replace(asPath);
@@ -69,7 +72,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
         <Alert isError={apiResponse.isError}>{apiResponse.text}</Alert>
       )}
       <Button
-        disabled={isSubmitting}
+        isLoading={isSubmitting}
         onClick={deleteHandler}
         type="outline-danger"
         fullWidth

@@ -3,6 +3,7 @@ import { Label } from "../UI/Label";
 import { Button } from "../UI/Button";
 import { Alert } from "../UI/Alert";
 import { useSettingsForm } from "../../hooks/useSettingsForm";
+import { Input } from "../UI/Input";
 
 export const Password: React.FC = () => {
   const {
@@ -18,29 +19,19 @@ export const Password: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="text-left m-2">
       <Label htmlFor="currentPassword">Current Password</Label>
-      <input
+      <Input
         {...register("currentPassword")}
         type="password"
         placeholder="********"
-        className={`w-full p-2 bg-gray-200 rounded border focus:outline-none ${
-          errors.currentPassword ? "border-red-500" : "border-gray-200"
-        }`}
+        error={errors.currentPassword}
       />
-      <p className="text-red-500 px-1 text-xs mb-2">
-        {errors.currentPassword?.message}
-      </p>
       <Label htmlFor="newPassword">New Password</Label>
-      <input
+      <Input
         {...register("newPassword")}
         type="password"
         placeholder="********"
-        className={`w-full p-2 bg-gray-200 rounded border focus:outline-none ${
-          errors.newPassword ? "border-red-500" : "border-gray-200"
-        }`}
+        error={errors.newPassword}
       />
-      <p className="text-red-500 px-1 text-xs mb-2">
-        {errors.newPassword?.message}
-      </p>
       {apiResponse && (
         <Alert isError={apiResponse.isError} className="mt-2">
           {apiResponse.text}
@@ -48,8 +39,9 @@ export const Password: React.FC = () => {
       )}
       <Button
         type="primary"
-        className="p-4"
-        disabled={!isValid || !isDirty || isSubmitting}
+        className="p-4 w-24"
+        disabled={!isValid || !isDirty}
+        isLoading={isSubmitting}
       >
         Save
       </Button>

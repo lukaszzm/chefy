@@ -42,8 +42,9 @@ export const Areas: React.FC<IAreasProps> = (props) => {
       )}
       <Button
         type="primary"
-        className="p-4"
-        disabled={!isDirty || isSubmitting}
+        className="p-4 w-24"
+        disabled={!isDirty}
+        isLoading={isSubmitting}
       >
         Save
       </Button>

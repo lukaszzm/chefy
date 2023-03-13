@@ -6,6 +6,7 @@ import { Alert } from "../UI/Alert";
 import { IApiResponse } from "../../interfaces/ApiResponse.interface";
 import { Button } from "../UI/Button";
 import { Label } from "../UI/Label";
+import { Input } from "../UI/Input";
 
 interface IRegisterFormProps {
   switchModal: () => void;
@@ -55,37 +56,28 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
         <Label htmlFor="name" className="p-1 font-semibold">
           Name
         </Label>
-        <input
+        <Input
           {...register("name")}
           type="text"
           placeholder="John"
-          className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
-            errors.name ? "border-red-500" : "border-gray-200"
-          }`}
+          error={errors.name}
         />
-        <p className="text-red-500 px-1 text-xs">{errors.name?.message}</p>
         <Label htmlFor="email" className="p-1 font-semibold">
           Email
         </Label>
-        <input
+        <Input
           {...register("email")}
           type="email"
           placeholder="example@example.com"
-          className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
-            errors.email ? "border-red-500" : "border-gray-200"
-          }`}
+          error={errors.email}
         />
-        <p className="text-red-500 px-1 text-xs">{errors.email?.message}</p>
         <Label htmlFor="password">Password</Label>
-        <input
+        <Input
           {...register("password")}
           type="password"
           placeholder="password must be at least 8 characters"
-          className={`w-full p-2 bg-gray-100 rounded border focus:outline-none ${
-            errors.password ? "border-red-500" : "border-gray-200"
-          }`}
+          error={errors.password}
         />
-        <p className="text-red-500 px-1 text-xs">{errors.password?.message}</p>
         {apiResponse && (
           <Alert isError={apiResponse.isError} className="mt-2">
             {apiResponse.text}
@@ -94,7 +86,8 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
         <Button
           type="primary"
           fullWidth
-          disabled={!isDirty || !isValid || isSubmitting}
+          disabled={!isDirty || !isValid}
+          isLoading={isSubmitting}
         >
           Submit
         </Button>

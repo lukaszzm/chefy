@@ -1,12 +1,12 @@
 import React from "react";
 
-interface ICheckBox {
+interface ICheckBoxProps {
   id: string;
   text: string;
   isCheckedByDefault?: boolean;
 }
 
-export const Checkbox = React.forwardRef<HTMLInputElement, ICheckBox>(
+export const Checkbox = React.forwardRef<HTMLInputElement, ICheckBoxProps>(
   (props, ref) => {
     const { id, text, isCheckedByDefault, ...rest } = props;
 
