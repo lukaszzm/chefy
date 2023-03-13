@@ -53,15 +53,22 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
 
   return (
     <Card>
-      <ResponsiveImage src={imageSrc} alt={title} />
-      <Title>{title}</Title>
-      <div className="overflow-auto h-64 mb-2">
+      <div className="h-[36rem] overflow-auto">
+        <ResponsiveImage src={imageSrc} alt={title} />
+        <Title>{title}</Title>
         <Category category={category.name} area={area.name} />
-        <Ingredients
-          shortVersion={isShortVersion}
-          ingredientsList={ingredients}
-        />
-        <Instruction shortVersion={isShortVersion} instruction={instructions} />
+        {!isShortVersion && (
+          <>
+            <Ingredients
+              shortVersion={isShortVersion}
+              ingredientsList={ingredients}
+            />
+            <Instruction
+              shortVersion={isShortVersion}
+              instruction={instructions}
+            />
+          </>
+        )}
         <Button
           type="none"
           onClick={() => setIsShortVersion(!isShortVersion)}
