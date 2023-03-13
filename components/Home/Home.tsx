@@ -28,7 +28,7 @@ export const Home: React.FC = () => {
           <RegisterForm switchModal={switchModal} />
         )}
       </Modal>
-      <div className="flex flex-col h-screen justify-center overflow-auto">
+      <div className="flex flex-col min-h-screen justify-center overflow-auto">
         <NavBar openLoginModal={openLoginModal} />
         <Welcome openModal={openRegisterModal} />
       </div>

@@ -47,3 +47,9 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #787878;
 }
+
+@supports (-webkit-touch-callout: none) {
+  .h-screen {
+    height: -webkit-fill-available;
+  }
+}
