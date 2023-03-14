@@ -52,8 +52,8 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   };
 
   return (
-    <Card>
-      <div className="h-fit overflow-auto">
+    <>
+      <div className="h-[calc(100vh-12rem)] sm:h-auto overflow-auto">
         <ResponsiveImage src={imageSrc} alt={title} />
         <Title>{title}</Title>
         <Category category={category.name} area={area.name} />
@@ -83,6 +83,6 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         likeHandler={likeHandler}
         dislikeHandler={dislikeHandler}
       />
-    </Card>
+    </>
   );
 };
