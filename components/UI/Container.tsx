@@ -10,7 +10,7 @@ export const Container: React.FC<IContainerProps> = (props) => {
   const router = useRouter();
 
   const innerContainerStyles = classNames(
-    "bg-gray-50 p-6 pb-24 sm:pb-6 rounded-lg shadow-lg text-center flex flex-col w-full min-h-[100vh] sm:max-w-md sm:min-h-[44rem]",
+    "bg-gray-50 p-6 sm:pb-6 rounded-lg shadow-lg text-center flex flex-col w-full h-[calc(100vh-4rem)] sm:max-w-md sm:min-h-[44rem]",
     {
       "md:max-w-5xl": router.pathname === "/settings",
     }

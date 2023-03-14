@@ -10,7 +10,7 @@ interface IButtonsProps {
 export const Buttons: React.FC<IButtonsProps> = (props) => {
   const { likeHandler, dislikeHandler, disabled } = props;
   return (
-    <div className="w-full h-16 flex justify-around border-t border-t-gray">
+    <div className="w-full flex justify-around border-t border-t-gray mt-auto">
       <Button
         type="none"
         disabled={disabled}
