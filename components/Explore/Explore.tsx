@@ -1,4 +1,4 @@
-import { useRandomRecipe } from "../../hooks/useRandomRecipe";
+import { useRandomRecipe } from "@/hooks/useRandomRecipe";
 import { Recipe } from "./Recipe";
 import { RecipeError } from "./RecipeError";
 import { RecipeLoading } from "./RecipeLoading";

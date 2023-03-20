@@ -1,9 +1,9 @@
 import { Category } from "../Explore/Category";
 import { BiInfoCircle } from "react-icons/bi";
 import { Modal } from "../Modal/Modal";
-import { useModal } from "../../hooks/useModal";
+import { useModal } from "@/hooks/useModal";
 import { RecipeDetails } from "./RecipeDetails";
-import { Button } from "../UI/Button";
+import { Button } from "@/ui/Button";
 
 interface ILikedRecipe {
   id: string;

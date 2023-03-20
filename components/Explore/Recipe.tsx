@@ -3,12 +3,12 @@ import { Ingredients } from "./Ingredients";
 import { Instruction } from "./Instruction";
 import { Buttons } from "./Buttons";
 import { Category } from "./Category";
-import { ResponsiveImage } from "../UI/ResponsiveImage";
-import { IRecipe } from "../../interfaces/Recipe.interface";
-import { Title } from "../UI/Title";
-import { Button } from "../UI/Button";
-import { Alert } from "../UI/Alert";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
+import { IApiResponse } from "@/interfaces/ApiResponse.interface";
+import { IRecipe } from "@/interfaces/Recipe.interface";
+import { Title } from "@/ui/Title";
+import { Button } from "@/ui/Button";
+import { Alert } from "@/ui/Alert";
+import { ResponsiveImage } from "@/ui/ResponsiveImage";
 
 interface IRecipeProps extends IRecipe {
   refetchRecipe: () => void;

@@ -1,4 +1,4 @@
-import { Tag } from "../UI/Tag";
+import { Tag } from "@/ui/Tag";
 
 interface IIngredientsProps {
   ingredientsList: string[];

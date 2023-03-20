@@ -1,9 +1,9 @@
-import { UserSettingsSchema } from "../../schemas/UserSettingsSchema";
-import { Alert } from "../UI/Alert";
-import { Button } from "../UI/Button";
-import { Label } from "../UI/Label";
-import { useSettingsForm } from "../../hooks/useSettingsForm";
-import { Input } from "../UI/Input";
+import { UserSettingsSchema } from "@/schemas/UserSettingsSchema";
+import { useSettingsForm } from "@/hooks/useSettingsForm";
+import { Alert } from "@/ui/Alert";
+import { Button } from "@/ui/Button";
+import { Label } from "@/ui/Label";
+import { Input } from "@/ui/Input";
 
 interface IAccountProps {
   name: string;

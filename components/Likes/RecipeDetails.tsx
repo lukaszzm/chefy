@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
-import { Alert } from "../UI/Alert";
-import { Subtitle } from "../UI/Subtitle";
-import { Button } from "../UI/Button";
-import { Tag } from "../UI/Tag";
-import { generatePDF } from "../../utils/generatePDF";
+import { IApiResponse } from "@/interfaces/ApiResponse.interface";
+import { Alert } from "@/ui/Alert";
+import { Subtitle } from "@/ui/Subtitle";
+import { Button } from "@/ui/Button";
+import { Tag } from "@/ui/Tag";
+import { generatePDF } from "@/utils/generatePDF";
 import { useRouter } from "next/router";
 
 interface IRecipeDetailsProps {

@@ -1,9 +1,9 @@
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import prisma from "../../lib/prisma";
-import { IRecipe } from "../../interfaces/Recipe.interface";
-import { Likes } from "../../components/Likes/Likes";
+import prisma from "@/lib/prisma";
+import { IRecipe } from "@/interfaces/Recipe.interface";
+import { Likes } from "@/components/Likes";
 
 interface ILikesPageProps {
   recipes: IRecipe[];

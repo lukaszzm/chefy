@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
-import { Explore } from "../../components/Explore/Explore";
+import { Explore } from "@/components/Explore";
 
 const ExplorePage: NextPage = () => {
   return <Explore />;

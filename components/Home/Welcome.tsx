@@ -1,6 +1,6 @@
-import { Button } from "../UI/Button";
-import { Title } from "../UI/Title";
-import { Subtitle } from "../UI/Subtitle";
+import { Button } from "@/ui/Button";
+import { Title } from "@/ui/Title";
+import { Subtitle } from "@/ui/Subtitle";
 import { FoodIcons } from "./FoodIcons";
 
 interface IWelcomeProps {

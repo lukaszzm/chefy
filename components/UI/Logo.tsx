@@ -1,5 +1,5 @@
 import Image from "next/image";
-import icon from "../../public/logo.svg";
+import icon from "@/public/logo.svg";
 import classNames from "classnames";
 
 interface ILogoProps {

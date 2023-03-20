@@ -1,5 +1,5 @@
-import { Subtitle } from "../UI/Subtitle";
 import { Buttons } from "./Buttons";
+import { Subtitle } from "@/ui/Subtitle";
 
 export const RecipeError = () => {
   return (

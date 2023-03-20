@@ -1,9 +1,9 @@
-import { PasswordSchema } from "../../schemas/PasswordSchema";
-import { Label } from "../UI/Label";
-import { Button } from "../UI/Button";
-import { Alert } from "../UI/Alert";
-import { useSettingsForm } from "../../hooks/useSettingsForm";
-import { Input } from "../UI/Input";
+import { PasswordSchema } from "@/schemas/PasswordSchema";
+import { useSettingsForm } from "@/hooks/useSettingsForm";
+import { Label } from "@/ui/Label";
+import { Button } from "@/ui/Button";
+import { Alert } from "@/ui/Alert";
+import { Input } from "@/ui/Input";
 
 export const Password: React.FC = () => {
   const {

@@ -1,5 +1,5 @@
-import { IRecipe } from "../../interfaces/Recipe.interface";
-import { Title } from "../UI/Title";
+import { IRecipe } from "@/interfaces/Recipe.interface";
+import { Title } from "@/ui/Title";
 import { LikedRecipe } from "./LikedRecipe";
 import { Pagination } from "./Pagination";
 

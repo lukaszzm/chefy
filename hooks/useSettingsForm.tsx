@@ -2,7 +2,7 @@ import { useState } from "react";
 import { yupResolver } from "@corex/hook-form-yup-resolver";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
-import { IApiResponse } from "../interfaces/ApiResponse.interface";
+import { IApiResponse } from "@/interfaces/ApiResponse.interface";
 
 interface InitialProps {
   schema?: Yup.AnyObjectSchema;

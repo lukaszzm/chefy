@@ -1,11 +1,11 @@
-import { Button } from "../UI/Button";
-import { Logo } from "../UI/Logo";
+import { Button } from "@/ui/Button";
+import { Logo } from "@/ui/Logo";
 
-interface INavBarProps {
+interface IHomeNavbarProps {
   openLoginModal: () => void;
 }
 
-export const NavBar: React.FC<INavBarProps> = (props) => {
+export const NavBar: React.FC<IHomeNavbarProps> = (props) => {
   const { openLoginModal } = props;
 
   return (

@@ -1,10 +1,10 @@
-import { IArea } from "../../interfaces/Area.interface";
-import { Checkbox } from "../UI/Checkbox";
-import { isItemChosen } from "../../utils/isItemChosen";
-import { Alert } from "../UI/Alert";
-import { Button } from "../UI/Button";
-import { Label } from "../UI/Label";
-import { useSettingsForm } from "../../hooks/useSettingsForm";
+import { IArea } from "@/interfaces/Area.interface";
+import { isItemChosen } from "@/utils/isItemChosen";
+import { useSettingsForm } from "@/hooks/useSettingsForm";
+import { Checkbox } from "@/ui/Checkbox";
+import { Alert } from "@/ui/Alert";
+import { Button } from "@/ui/Button";
+import { Label } from "@/ui/Label";
 
 interface IAreasProps {
   allAreas: IArea[];

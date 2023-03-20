@@ -1,6 +1,5 @@
-import { all } from "axios";
-import { IArea } from "../../interfaces/Area.interface";
-import { ICategory } from "../../interfaces/Category.interface";
+import { IArea } from "@/interfaces/Area.interface";
+import { ICategory } from "@/interfaces/Category.interface";
 import { Areas } from "./Areas";
 import { Categories } from "./Categories";
 

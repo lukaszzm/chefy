@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Title } from "../UI/Title";
+import { Title } from "@/ui/Title";
 import { Portal } from "./Portal";
 
 interface IModalProps {

@@ -1,13 +1,13 @@
-import { LoginSchema } from "../../schemas/LoginSchema";
+import { LoginSchema } from "@/schemas/LoginSchema";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@corex/hook-form-yup-resolver";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { Alert } from "../UI/Alert";
-import { Button } from "../UI/Button";
-import { Label } from "../UI/Label";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
-import { Input } from "../UI/Input";
+import { Alert } from "@/ui/Alert";
+import { Button } from "@/ui/Button";
+import { Label } from "@/ui/Label";
+import { IApiResponse } from "@/interfaces/ApiResponse.interface";
+import { Input } from "@/ui/Input";
 
 interface ILoginFormProps {
   switchModal: () => void;

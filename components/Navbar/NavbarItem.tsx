@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button } from "../UI/Button";
+import { Button } from "@/ui/Button";
 import classNames from "classnames";
 
 interface IMenuItemProps {
@@ -10,7 +10,7 @@ interface IMenuItemProps {
   onClick?: () => void;
 }
 
-export const MenuItem: React.FC<IMenuItemProps> = (props) => {
+export const NavbarItem: React.FC<IMenuItemProps> = (props) => {
   const { icon, text, type, onClick } = props;
   const router = useRouter();
 

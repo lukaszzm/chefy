@@ -2,7 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
-import { Layout } from "../layout/Layout";
+import { DashboardLayout } from "@/layouts/DashboardLayout";
 import NextProgress from "next-progress";
 
 const protectedRoutes = ["/explore", "/likes", "/settings"];
@@ -17,9 +17,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
       </Head>
       <NextProgress height="5px" color="#3CA83C" />
       {protectedRoutes.includes(router.pathname) ? (
-        <Layout>
+        <DashboardLayout>
           <Component {...pageProps} />
-        </Layout>
+        </DashboardLayout>
       ) : (
         <Component {...pageProps} />
       )}

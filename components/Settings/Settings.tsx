@@ -1,7 +1,7 @@
-import { IArea } from "../../interfaces/Area.interface";
-import { ICategory } from "../../interfaces/Category.interface";
-import { Subtitle } from "../UI/Subtitle";
-import { Title } from "../UI/Title";
+import { IArea } from "@/interfaces/Area.interface";
+import { ICategory } from "@/interfaces/Category.interface";
+import { Subtitle } from "@/ui/Subtitle";
+import { Title } from "@/ui/Title";
 import { Account } from "./Account";
 import { Password } from "./Password";
 import { Preferences } from "./Preferences";

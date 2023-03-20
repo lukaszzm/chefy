@@ -1,10 +1,10 @@
-import { ICategory } from "../../interfaces/Category.interface";
-import { isItemChosen } from "../../utils/isItemChosen";
-import { Checkbox } from "../UI/Checkbox";
-import { Alert } from "../UI/Alert";
-import { Button } from "../UI/Button";
-import { Label } from "../UI/Label";
-import { useSettingsForm } from "../../hooks/useSettingsForm";
+import { ICategory } from "@/interfaces/Category.interface";
+import { useSettingsForm } from "@/hooks/useSettingsForm";
+import { isItemChosen } from "@/utils/isItemChosen";
+import { Checkbox } from "@/ui/Checkbox";
+import { Alert } from "@/ui/Alert";
+import { Button } from "@/ui/Button";
+import { Label } from "@/ui/Label";
 
 interface ICategoriesProps {
   allCategories: ICategory[];

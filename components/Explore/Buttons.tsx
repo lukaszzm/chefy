@@ -1,5 +1,5 @@
 import { BiHeart, BiX } from "react-icons/bi";
-import { Button } from "../UI/Button";
+import { Button } from "@/ui/Button";
 
 interface IButtonsProps {
   likeHandler?: () => void;

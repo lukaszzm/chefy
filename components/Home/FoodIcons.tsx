@@ -1,9 +1,9 @@
-import pizza from "../../public/pizza.svg";
-import pot from "../../public/pot.svg";
-import spaghetti from "../../public/spaghetti.svg";
-import sushi from "../../public/sushi.svg";
-import steaming from "../../public/steaming.svg";
-import omlet from "../../public/omlet.svg";
+import pizza from "@/public/pizza.svg";
+import pot from "@/public/pot.svg";
+import spaghetti from "@/public/spaghetti.svg";
+import sushi from "@/public/sushi.svg";
+import steaming from "@/public/steaming.svg";
+import omlet from "@/public/omlet.svg";
 import Image from "next/image";
 
 const foodIcons = [pizza, pot, spaghetti, sushi, steaming, omlet];

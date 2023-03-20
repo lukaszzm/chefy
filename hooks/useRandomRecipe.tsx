@@ -1,6 +1,6 @@
-import fetcher from "../lib/fetcher";
+import fetcher from "@/lib/fetcher";
 import useSWR, { useSWRConfig } from "swr";
-import { IRecipe } from "../interfaces/Recipe.interface";
+import { IRecipe } from "@/interfaces/Recipe.interface";
 
 export const useRandomRecipe = () => {
   const { data, error, isValidating } = useSWR<IRecipe, Error>(

@@ -1,5 +1,5 @@
-import { ICategory } from "../interfaces/Category.interface";
-import { IArea } from "../interfaces/Area.interface";
+import { ICategory } from "@/interfaces/Category.interface";
+import { IArea } from "@/interfaces/Area.interface";
 
 export const isItemChosen = (
   el: ICategory | IArea,

@@ -1,12 +1,12 @@
 import { yupResolver } from "@corex/hook-form-yup-resolver";
 import { useForm } from "react-hook-form";
-import { RegisterSchema } from "../../schemas/RegisterSchema";
+import { RegisterSchema } from "@/schemas/RegisterSchema";
 import { useState } from "react";
-import { Alert } from "../UI/Alert";
-import { IApiResponse } from "../../interfaces/ApiResponse.interface";
-import { Button } from "../UI/Button";
-import { Label } from "../UI/Label";
-import { Input } from "../UI/Input";
+import { IApiResponse } from "@/interfaces/ApiResponse.interface";
+import { Alert } from "@/ui/Alert";
+import { Button } from "@/ui/Button";
+import { Label } from "@/ui/Label";
+import { Input } from "@/ui/Input";
 
 interface IRegisterFormProps {
   switchModal: () => void;
