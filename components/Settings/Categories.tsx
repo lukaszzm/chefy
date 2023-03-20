@@ -16,7 +16,7 @@ export const Categories: React.FC<ICategoriesProps> = (props) => {
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isSubmitting },
+    formState: { isDirty, isSubmitting, errors },
     apiResponse,
     onSubmit,
   } = useSettingsForm({});
