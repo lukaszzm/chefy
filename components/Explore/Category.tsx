@@ -3,15 +3,15 @@ import { Tag } from "../UI/Tag";
 interface ICategoryProps {
   category: string;
   area: string;
-  noTitle?: boolean;
+  hideLabel: boolean;
 }
 
 export const Category: React.FC<ICategoryProps> = (props) => {
-  const { category, area, noTitle } = props;
+  const { category, area, hideLabel } = props;
 
   return (
     <>
-      {!noTitle && (
+      {!!!hideLabel && (
         <h3 className="text-left font-semibold text-gray-900">Category</h3>
       )}
       <div className="flex justify-start">

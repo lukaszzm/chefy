@@ -15,7 +15,7 @@ export const ResponsiveImage: React.FC<IResonsiveImageProps> = (props) => {
       width={700}
       height={475}
       sizes="20vw"
-      className="w-full h-auto max-h-[25rem] rounded-lg"
+      className="w-full h-auto max-h-[25rem] sm:min-h-[25rem] rounded-lg"
     />
   );
 };

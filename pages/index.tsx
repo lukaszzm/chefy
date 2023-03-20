@@ -4,8 +4,9 @@ import { LoadingScreen } from "../components/UI/LoadingScreen";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { Home } from "../components/Home/Home";
+import { NextPage } from "next";
 
-const MainPage = () => {
+const HomePage: NextPage = () => {
   const { status } = useSession();
   const router = useRouter();
 
@@ -13,7 +14,7 @@ const MainPage = () => {
 
   if (status === "authenticated") router.replace("/explore");
 
-  if (status === "unauthenticated") return <Home />;
+  return <Home />;
 };
 
 export async function getServerSideProps(context: any) {
@@ -32,4 +33,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default MainPage;
+export default HomePage;

@@ -3,44 +3,16 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import prisma from "../../lib/prisma";
 import { IRecipe } from "../../interfaces/Recipe.interface";
-import { LikedRecipe } from "../../components/Likes/LikedRecipe";
-import { Title } from "../../components/UI/Title";
-import { Pagination } from "../../components/Likes/Pagination";
+import { Likes } from "../../components/Likes/Likes";
 
-interface ILikesProps {
+interface ILikesPageProps {
   recipes: IRecipe[];
   currentPage: number;
   pageCount: number;
 }
 
-const Likes: NextPage<ILikesProps> = (props) => {
-  const { recipes, currentPage, pageCount } = props;
-
-  return (
-    <>
-      <Title className="mb-8">Your liked recipes</Title>
-      {recipes.length > 0 ? (
-        <>
-          {recipes.map((el) => (
-            <LikedRecipe
-              key={el.id}
-              id={el.id}
-              title={el.title}
-              area={el.area.name}
-              category={el.category.name}
-              ingredients={el.ingredients}
-              instructions={el.instructions}
-            />
-          ))}
-          <Pagination currentPage={currentPage} pageCount={pageCount} />
-        </>
-      ) : (
-        <p className="font-semibold text-gray-500 my-auto">
-          You don&apos;t have any recipes yet.
-        </p>
-      )}
-    </>
-  );
+const LikesPage: NextPage<ILikesPageProps> = (props) => {
+  return <Likes {...props} />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -111,4 +83,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Likes;
+export default LikesPage;

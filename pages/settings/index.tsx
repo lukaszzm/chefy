@@ -1,16 +1,12 @@
 import { NextPage } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { Account } from "../../components/Settings/Account";
-import { Preferences } from "../../components/Settings/Preferences";
 import prisma from "../../lib/prisma";
 import { IArea } from "../../interfaces/Area.interface";
 import { ICategory } from "../../interfaces/Category.interface";
-import { Title } from "../../components/UI/Title";
-import { Subtitle } from "../../components/UI/Subtitle";
-import { Password } from "../../components/Settings/Password";
+import { Settings } from "../../components/Settings/Settings";
 
-interface ISettingsProps {
+interface ISettingsPageProps {
   name: string;
   allAreas: IArea[];
   allCategories: ICategory[];
@@ -18,38 +14,8 @@ interface ISettingsProps {
   defaultCategories: ICategory[];
 }
 
-const Settings: NextPage<ISettingsProps> = (props) => {
-  const { name, allAreas, allCategories, defaultAreas, defaultCategories } =
-    props;
-
-  return (
-    <>
-      <Title>Settings</Title>
-      <div className="flex flex-col xl:flex-row max-w-5xl">
-        <div className="w-full">
-          <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
-            <Subtitle>General Info</Subtitle>
-            <Account name={name} />
-          </div>
-          <div className="p-4 m-4 my-8 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
-            <Subtitle>Password</Subtitle>
-            <Password />
-          </div>
-        </div>
-        <div className="w-full">
-          <div className="p-4 m-4 bg-gray-100 rounded-lg shadow-sm border border-gray-200">
-            <Subtitle>Preferences</Subtitle>
-            <Preferences
-              allCategories={allCategories}
-              allAreas={allAreas}
-              defaultAreas={defaultAreas}
-              defaultCategories={defaultCategories}
-            />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+const SettingsPage: NextPage<ISettingsPageProps> = (props) => {
+  return <Settings {...props} />;
 };
 
 export async function getServerSideProps(context: any) {
@@ -100,4 +66,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default Settings;
+export default SettingsPage;

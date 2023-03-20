@@ -1,34 +1,10 @@
 import { NextPage } from "next";
 import { authOptions } from "../api/auth/[...nextauth]";
-import { Recipe } from "../../components/Recipe/Recipe";
-import { RecipeLoading } from "../../components/Recipe/RecipeLoading";
 import { getServerSession } from "next-auth";
-import { useRandomRecipe } from "../../hooks/useRandomRecipe";
-import { RecipeError } from "../../components/Recipe/RecipeError";
-import { RecipeNotFound } from "../../components/Recipe/RecipeNotFound";
+import { Explore } from "../../components/Explore/Explore";
 
-const Explore: NextPage = () => {
-  const { data, error, isValidating, refetchData } = useRandomRecipe();
-
-  if (isValidating) return <RecipeLoading />;
-
-  if (error) return <RecipeError />;
-
-  if (data)
-    return (
-      <Recipe
-        id={data.id}
-        title={data.title}
-        imageSrc={data.imageSrc}
-        category={data.category}
-        area={data.area}
-        ingredients={data.ingredients}
-        instructions={data.instructions}
-        refetchRecipe={() => refetchData()}
-      />
-    );
-
-  return <RecipeNotFound />;
+const ExplorePage: NextPage = () => {
+  return <Explore />;
 };
 
 export async function getServerSideProps(context: any) {
@@ -48,4 +24,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default Explore;
+export default ExplorePage;

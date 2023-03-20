@@ -10,14 +10,15 @@ export const Container: React.FC<IContainerProps> = (props) => {
   const router = useRouter();
 
   const innerContainerStyles = classNames(
-    "bg-gray-50 p-6 sm:pb-6 rounded-lg shadow-lg text-center flex flex-col w-full h-[calc(100vh-4rem)] sm:max-w-md sm:min-h-[44rem]",
+    "bg-gray-50 p-2 sm:p-6 sm:m-4 rounded-lg shadow-lg text-center flex flex-col w-full h-[calc(100vh-4rem)] sm:h-auto overflow-auto sm:max-w-md sm:min-h-[43rem]",
     {
+      "sm:max-h-[41rem]": router.pathname === "/explore",
       "md:max-w-5xl": router.pathname === "/settings",
     }
   );
 
   return (
-    <div className="w-full h-full sm:ml-40 sm:m-8 md:ml-72 sm:mb-8  flex justify-center items-center">
+    <div className="w-full min-h-screen h-full sm:ml-40 md:ml-72 flex justify-center items-start sm:items-center">
       <div className={innerContainerStyles}>{children}</div>
     </div>
   );
