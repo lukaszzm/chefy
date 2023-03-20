@@ -13,7 +13,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <Head>
         <title>Chefy</title>
         <meta name="description" content="Chefy - Because we love cooking" />
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/icon.svg" />
       </Head>
       <NextProgress height="5px" color="#3CA83C" />
       {protectedRoutes.includes(router.pathname) ? (
