@@ -11,7 +11,7 @@
   <img align="center" alt="preview of app 2" width="40%" src="public/preview_2.png">
 </p>
 
-## 📰About The Project
+## 📰 About The Project
 
 <p> It's a web application built using NextJS framework that enables users to discover recipes from different parts of the world. Additionally, users can save their favorite recipes and export them to PDF files.
 
@@ -41,6 +41,7 @@ You can <b>register</b> with your own credentials!
 <p>
 <img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="nextJS" />
 <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+<img src="https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white" alt="prisma" />
 </p>
 
 ##
