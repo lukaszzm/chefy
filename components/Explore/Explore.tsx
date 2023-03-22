@@ -2,14 +2,20 @@ import { useRandomRecipe } from "@/hooks/useRandomRecipe";
 import { Recipe } from "./Recipe";
 import { RecipeError } from "./RecipeError";
 import { RecipeLoading } from "./RecipeLoading";
-import { RecipeNotFound } from "./RecipeNotFound";
 
-export const Explore = () => {
+export const Explore: React.FC = () => {
   const { data, error, isValidating, refetchData } = useRandomRecipe();
 
   if (isValidating) return <RecipeLoading />;
 
-  if (error) return <RecipeError />;
+  if (error)
+    return (
+      <RecipeError
+        title="Something went wrong."
+        text="Try again later."
+        bgColor="red"
+      />
+    );
 
   if (data)
     return (
@@ -25,5 +31,11 @@ export const Explore = () => {
       />
     );
 
-  return <RecipeNotFound />;
+  return (
+    <RecipeError
+      title="No more recipes found."
+      text="Change preferences to discover more recipes!"
+      bgColor="gray"
+    />
+  );
 };

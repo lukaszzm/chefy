@@ -16,7 +16,7 @@ export const Button: React.FC<IButtonProps> = (props) => {
     props;
 
   const style = classNames(
-    "font-semibold disabled:opacity-60 disabled:pointer-events-none text-l leading-tight rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
+    "font-medium disabled:opacity-60 disabled:pointer-events-none text-l leading-tight rounded focus:outline-none focus:ring-0 transition duration-150 ease-in-out",
     {
       "border py-3 my-2 active:shadow-lg focus:shadow-lg hover:shadow-lg shadow-md":
         type !== "none",

@@ -29,9 +29,9 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiResponse, setApiResponse] = useState<IApiResponse | null>(null);
 
-  const likeHandler = async () => sendRequest("/api/recipes/likes");
+  const likeHandler = async () => await sendRequest("/api/recipes/likes");
 
-  const dislikeHandler = () => sendRequest("/api/recipes/dislikes");
+  const dislikeHandler = async () => await sendRequest("/api/recipes/dislikes");
 
   const sendRequest = async (url: string) => {
     setIsSubmitting(true);
@@ -62,20 +62,14 @@ export const Recipe: React.FC<IRecipeProps> = (props) => {
         />
         {!isShortVersion && (
           <>
-            <Ingredients
-              shortVersion={isShortVersion}
-              ingredientsList={ingredients}
-            />
-            <Instruction
-              shortVersion={isShortVersion}
-              instruction={instructions}
-            />
+            <Ingredients ingredientsList={ingredients} />
+            <Instruction instruction={instructions} />
           </>
         )}
         <Button
           type="none"
           onClick={() => setIsShortVersion(!isShortVersion)}
-          className="font-semibold text-sm p-3 m-1 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
+          className="font-medium text-sm p-3 m-1 text-gray-700 bg-gray-100 rounded-3xl shadow-sm hover:bg-gray-200 hover:shadow-sm"
         >
           {isShortVersion ? "Read More" : "Read less"}
         </Button>

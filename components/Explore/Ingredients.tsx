@@ -2,23 +2,16 @@ import { Tag } from "@/ui/Tag";
 
 interface IIngredientsProps {
   ingredientsList: string[];
-  shortVersion?: boolean;
 }
 
 export const Ingredients: React.FC<IIngredientsProps> = (props) => {
-  const { ingredientsList, shortVersion } = props;
-
-  const fixedIngredientsList = shortVersion
-    ? ingredientsList.slice(0, 2)
-    : ingredientsList;
-
-  if (shortVersion) fixedIngredientsList.push("And more..");
+  const { ingredientsList } = props;
 
   return (
     <>
-      <h3 className="text-left font-semibold text-gray-900">Ingredients</h3>
+      <p className="text-left font-medium text-gray-900">Ingredients</p>
       <div className="flex flex-row flex-wrap max-w-full">
-        {fixedIngredientsList.map((el, index) => (
+        {ingredientsList.map((el, index) => (
           <Tag key={index}>{el}</Tag>
         ))}
       </div>

@@ -12,6 +12,7 @@ export const ResponsiveImage: React.FC<IResonsiveImageProps> = (props) => {
     <Image
       alt={alt}
       src={src}
+      priority
       width={700}
       height={475}
       sizes="20vw"

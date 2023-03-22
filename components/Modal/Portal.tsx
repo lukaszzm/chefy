@@ -13,7 +13,6 @@ export const Portal = ({
 
   useEffect(() => {
     ref.current = document.querySelector(selector);
-    console.log(ref.current);
     setMounted(true);
   }, [selector]);
 

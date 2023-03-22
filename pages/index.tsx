@@ -4,7 +4,7 @@ import { LoadingScreen } from "@/ui/LoadingScreen";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { Home } from "@/components/Home";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 
 const HomePage: NextPage = () => {
   const { status } = useSession();
@@ -17,7 +17,7 @@ const HomePage: NextPage = () => {
   return <Home />;
 };
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session) {
@@ -26,11 +26,13 @@ export async function getServerSideProps(context: any) {
         destination: "/explore",
         permament: false,
       },
+      props: {},
     };
   }
+
   return {
     props: {},
   };
-}
+};
 
 export default HomePage;

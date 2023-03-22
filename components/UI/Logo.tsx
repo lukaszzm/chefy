@@ -20,11 +20,11 @@ export const Logo: React.FC<ILogoProps> = (props) => {
       <Image
         src={icon}
         alt="icon"
-        height={36}
-        width={36}
-        style={{ marginTop: "0.2rem", marginRight: "0.5rem" }}
+        height={12}
+        width={12}
+        className="w-10 h-auto mx-1"
       />
-      <p className="hidden font-semibold text-4xl md:block">Chefy</p>
+      <p className="hidden font-medium text-4xl md:block">Chefy</p>
     </div>
   );
 };

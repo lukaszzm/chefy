@@ -16,7 +16,7 @@ export const Areas: React.FC<IAreasProps> = (props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isDirty, isSubmitting },
+    formState: { isDirty, isSubmitting },
     apiResponse,
     onSubmit,
   } = useSettingsForm({});

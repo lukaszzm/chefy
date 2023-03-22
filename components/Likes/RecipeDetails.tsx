@@ -21,7 +21,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
   const router = useRouter();
   const { asPath } = router;
 
-  const deleteHandler = async () => {
+  const deleteHandler = async (id: string) => {
     setApiResponse(null);
     setIsSubmitting(true);
     const response = await fetch("/api/recipes/likes", {
@@ -73,7 +73,7 @@ export const RecipeDetails: React.FC<IRecipeDetailsProps> = (props) => {
       )}
       <Button
         isLoading={isSubmitting}
-        onClick={deleteHandler}
+        onClick={() => deleteHandler(id)}
         type="outline-danger"
         fullWidth
       >

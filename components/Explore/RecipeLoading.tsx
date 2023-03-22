@@ -1,6 +1,6 @@
 import { Buttons } from "./Buttons";
 
-export const RecipeLoading = () => {
+export const RecipeLoading: React.FC = () => {
   return (
     <>
       <div className="h-full">

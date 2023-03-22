@@ -31,7 +31,7 @@ export const Likes: React.FC<ILikesProps> = (props) => {
           <Pagination currentPage={currentPage} pageCount={pageCount} />
         </>
       ) : (
-        <p className="font-semibold text-gray-500 my-auto">
+        <p className="font-medium text-gray-500 my-auto">
           You don&apos;t have any recipes yet.
         </p>
       )}

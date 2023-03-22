@@ -43,14 +43,12 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
         isError: true,
         text: response?.error || "Something went wrong.",
       });
-
-    console.log(response);
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="email" className="p-1 font-semibold">
+        <Label htmlFor="email" className="p-1 font-medium">
           Email
         </Label>
         <Input
@@ -84,7 +82,7 @@ export const LoginForm: React.FC<ILoginFormProps> = (props) => {
         Not have an account?
         <a
           onClick={switchModal}
-          className="cursor-pointer font-semibold mx-2 text-primary hover:text-primary-hover transition duration-150 ease-in-out hover:underline"
+          className="cursor-pointer font-medium mx-2 text-primary hover:text-primary-hover transition duration-150 ease-in-out hover:underline"
         >
           Sign up here!
         </a>

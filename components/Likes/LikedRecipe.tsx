@@ -22,7 +22,7 @@ export const LikedRecipe: React.FC<ILikedRecipe> = (props) => {
     <>
       <div className="flex justify-between items-center bg-gray-100 p-2 px-4 mb-4 rounded-md shadow-sm border border-gray-200">
         <div>
-          <p className="text-left p-1 font-semibold text-md">{title}</p>
+          <p className="text-left p-1 font-medium text-md">{title}</p>
           <Category hideLabel={true} category={category} area={area} />
         </div>
         <Button

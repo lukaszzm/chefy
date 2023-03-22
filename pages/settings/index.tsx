@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import prisma from "@/lib/prisma";
@@ -18,7 +18,7 @@ const SettingsPage: NextPage<ISettingsPageProps> = (props) => {
   return <Settings {...props} />;
 };
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
   const userEmail = session?.user?.email;
   const userName = session?.user?.name;
@@ -29,6 +29,7 @@ export async function getServerSideProps(context: any) {
         destination: "/",
         permament: false,
       },
+      props: {},
     };
   }
 
@@ -64,6 +65,6 @@ export async function getServerSideProps(context: any) {
       defaultAreas,
     },
   };
-}
+};
 
 export default SettingsPage;

@@ -53,7 +53,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="name" className="p-1 font-semibold">
+        <Label htmlFor="name" className="p-1 font-medium">
           Name
         </Label>
         <Input
@@ -62,7 +62,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
           placeholder="John"
           error={errors.name}
         />
-        <Label htmlFor="email" className="p-1 font-semibold">
+        <Label htmlFor="email" className="p-1 font-medium">
           Email
         </Label>
         <Input
@@ -96,7 +96,7 @@ export const RegisterForm: React.FC<IRegisterFormProps> = (props) => {
         Already have an account?
         <a
           onClick={switchModal}
-          className="cursor-pointer font-semibold mx-2 text-primary hover:text-primary-hover transition duration-150 ease-in-out hover:underline"
+          className="cursor-pointer font-medium mx-2 text-primary hover:text-primary-hover transition duration-150 ease-in-out hover:underline"
         >
           Sign in here!
         </a>

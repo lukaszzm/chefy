@@ -8,7 +8,7 @@ export const Subtitle: React.FC<ISubtitleProps> = (props) => {
 
   return (
     <h2
-      className={`${className} text-left font-semibold border-b-gray-400  text-lg`}
+      className={`${className} text-left font-medium border-b-gray-400  text-lg`}
     >
       {children}
     </h2>
