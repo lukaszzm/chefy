@@ -1,34 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+    <img src="public/icon.svg" alt="Logo" width="80" height="80">
+  <h1 align="center">Chefy</h3>
+  <p align="center">
+    Recipe app written in <b>NextJS</b> with a tinder-inspired design
+  </p>
+</div>
 
-## Getting Started
+<p align="center">
+  <img align="center" alt="preview of app 1" width="40%" src="public/preview_1.png">
+  <img align="center" alt="preview of app 2" width="40%" src="public/preview_2.png">
+</p>
 
-First, run the development server:
+## 📰About The Project
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<p> It's a web application built using NextJS framework that enables users to discover recipes from different parts of the world. Additionally, users can save their favorite recipes and export them to PDF files.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ️🔴 Live Preview
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Click on this <b>[link](https://chefy.up.railway.app/)</b> to see a live app preview.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🔐 Login Credentials
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+**Email:** test@test.com  
+**Password:** testtest
 
-## Learn More
+**OR**
 
-To learn more about Next.js, take a look at the following resources:
+You can <b>register</b> with your own credentials!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙ Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- User authentication
+- Explore recipes with selected preferences
+- Browse liked recipes
+- Export recipes to PDF
+- Customize preferences
 
-## Deploy on Vercel
+## 🧑‍💻 Built With
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p>
+<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="nextJS" />
+<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+##
+
+Data collected from https://www.themealdb.com/
