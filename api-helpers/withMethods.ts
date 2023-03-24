@@ -1,9 +1,9 @@
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
 export const withMethods = (methods: string[], handler: NextApiHandler) => {
-  return async function (request: NextApiRequest, response: NextApiResponse) {
+  return async (request: NextApiRequest, response: NextApiResponse) => {
     if (!request.method || !methods.includes(request.method)) {
-      return response.status(405).json("Method not allowed.");
+      return response.status(405).json({ message: "Method not allowed." });
     }
 
     return handler(request, response);
