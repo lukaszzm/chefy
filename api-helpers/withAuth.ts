@@ -6,9 +6,10 @@ export const withAuth = (handler: NextApiHandler) => {
   return async (request: NextApiRequest, response: NextApiResponse) => {
     const session = await getServerSession(request, response, authOptions);
 
-    if (!session?.user?.email) {
+    if (!session) {
       return response.status(401).json({ message: "Unauthorized" });
     }
+
     request.body.email = session.user.email;
     return handler(request, response);
   };
