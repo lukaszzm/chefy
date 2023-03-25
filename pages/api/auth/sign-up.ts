@@ -2,20 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { withMethods, withValidation } from "@/api-helpers";
-import * as yup from "yup";
+import { z } from "zod";
+import { RegisterSchema } from "@/schemas/RegisterSchema";
 
-const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  name: yup.string().required(),
-  password: yup.string().required(),
-});
-
-// TODO: Fix type of RequestBody - e.g.: email returns string | undefined
-interface RequestBody {
-  email: string;
-  name: string;
-  password: string;
-}
+type RequestBody = z.infer<typeof RegisterSchema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email, name, password }: RequestBody = req.body;
@@ -61,4 +51,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default withMethods(["POST"], withValidation(schema, handler));
+export default withMethods(["POST"], withValidation(RegisterSchema, handler));

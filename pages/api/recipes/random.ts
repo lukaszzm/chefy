@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import { withAuth, withMethods, withValidation } from "@/api-helpers";
-import * as yup from "yup";
+import { z } from "zod";
 
-const schema = yup.object().shape({
-  email: yup.string().required(),
+const schema = z.object({
+  email: z.string().email(),
 });
 
-interface RequestBody extends yup.TypeOf<typeof schema> {}
+type RequestBody = z.infer<typeof schema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email }: RequestBody = req.body;

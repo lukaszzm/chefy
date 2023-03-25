@@ -2,18 +2,20 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
 import { withAuth, withMethods, withValidation } from "@/api-helpers";
-import * as yup from "yup";
+import { z } from "zod";
 
-const schema = yup.object().shape({
-  email: yup.string(),
-  name: yup.string(),
-  prefferedCategories: yup.array().of(yup.string()),
-  prefferedAreas: yup.array().of(yup.string()),
-  currentPassword: yup.string(),
-  newPassword: yup.string(),
-});
+const schema = z
+  .object({
+    email: z.string().email(),
+    name: z.string().min(1),
+    prefferedCategories: z.array(z.string()),
+    prefferedAreas: z.array(z.string()),
+    currentPassword: z.string().min(8),
+    newPassword: z.string().min(8),
+  })
+  .partial();
 
-interface RequestBody extends yup.TypeOf<typeof schema> {}
+type RequestBody = z.infer<typeof schema>;
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
