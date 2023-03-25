@@ -15,7 +15,7 @@ export const withValidation = <T extends OptionalObjectSchema<ObjectShape>>(
       if (error instanceof yup.ValidationError) {
         return response.status(400).json({ message: error.message });
       }
-      return response.status(500).json({ message: "Something went wrong." });
+      return response.status(400).json({ message: "Something went wrong." });
     }
   };
 };

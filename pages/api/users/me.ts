@@ -1,39 +1,35 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]";
+import { withAuth, withMethods, withValidation } from "@/api-helpers";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  email: yup.string(),
+  name: yup.string(),
+  prefferedCategories: yup.array().of(yup.string()),
+  prefferedAreas: yup.array().of(yup.string()),
+  currentPassword: yup.string(),
+  newPassword: yup.string(),
+});
+
+interface RequestBody extends yup.TypeOf<typeof schema> {}
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "PATCH")
-    return res.status(405).json({ message: "Method not allowed." });
-
-  const session = await getServerSession(req, res, authOptions);
-  const userEmail = session?.user?.email;
-
-  if (!userEmail) {
-    return res.status(401).end();
-  }
-
   const {
+    email,
     name,
     prefferedCategories,
     prefferedAreas,
     currentPassword,
     newPassword,
-  }: {
-    name: string;
-    prefferedCategories: string[];
-    prefferedAreas: string[];
-    currentPassword: string;
-    newPassword: string;
-  } = req.body;
+  }: RequestBody = req.body;
 
   try {
     if (name) {
       await prisma.user.update({
         where: {
-          email: userEmail,
+          email,
         },
         data: {
           name,
@@ -55,7 +51,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await prisma.user.update({
         where: {
-          email: userEmail,
+          email,
         },
         data: {
           prefferedCategories: {
@@ -82,7 +78,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await prisma.user.update({
         where: {
-          email: userEmail,
+          email,
         },
         data: {
           prefferedAreas: {
@@ -100,7 +96,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (currentPassword && newPassword) {
       const user = await prisma.user.findUnique({
-        where: { email: userEmail },
+        where: { email },
       });
 
       if (!user) throw new Error("Cannot find the user.");
@@ -114,7 +110,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       await prisma.user.update({
         where: {
-          email: userEmail,
+          email,
         },
         data: {
           password: bcrypt.hashSync(newPassword, 10),
@@ -130,4 +126,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default handler;
+export default withMethods(
+  ["PATCH"],
+  withAuth(withValidation(schema, handler))
+);

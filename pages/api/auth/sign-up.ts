@@ -1,18 +1,24 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcrypt";
+import { withMethods, withValidation } from "@/api-helpers";
+import * as yup from "yup";
 
-interface ICredentials {
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  name: yup.string().required(),
+  password: yup.string().required(),
+});
+
+// TODO: Fix type of RequestBody - e.g.: email returns string | undefined
+interface RequestBody {
   email: string;
   name: string;
   password: string;
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "POST")
-    return res.status(405).json({ message: "Method not allowed." });
-
-  const { email, name, password }: ICredentials = req.body;
+  const { email, name, password }: RequestBody = req.body;
   const fixedEmail = email.toLowerCase();
 
   try {
@@ -36,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     await prisma.user.create({
       data: {
         email: fixedEmail,
-        name: name,
+        name,
         password: bcrypt.hashSync(password, 10),
         prefferedCategories: {
           connect: allCategoriesIds,
@@ -55,4 +61,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default handler;
+export default withMethods(["POST"], withValidation(schema, handler));
